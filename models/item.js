@@ -2,7 +2,7 @@ const { Schema, default: mongoose } = require("mongoose");
 
 const ItemSchema = new Schema({
   name: { type: String, minLength: 1, maxLength: 100 },
-  descritption: { type: String, minLength: 1, maxLength: 100 },
+  descritption: { type: String, minLength: 1 },
   price: { type: Number },
   category: { type: Schema.Types.ObjectId, ref: "Category" },
   count: { type: Number },
