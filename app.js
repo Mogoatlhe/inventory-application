@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 var indexRouter = require("./routes/index");
 
 var app = express();
-const mongoDB = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.cx538ew.mongodb.net/?retryWrites=true&w=majority`;
+const mongoDB = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.cx538ew.mongodb.net/Inventory?retryWrites=true&w=majority`;
 
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
