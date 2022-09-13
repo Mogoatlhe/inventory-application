@@ -1,7 +1,18 @@
 doctype html
-html
+html(lang='en')
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/stylesheets/output.css')
   body
-    block content
+    header.fixed.w-screen
+      .bg-black 
+        p.text-white.font-lato.font-black.text-2xl.py-3.px-3 COOLWORTHS
+    
+    .px-3.flex.items-center.flex-col 
+      h1.pt-20.font-black.text-xl CLOTHING
+      .flex 
+      
+
+      block content
