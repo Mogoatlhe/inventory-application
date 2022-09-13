@@ -7,6 +7,7 @@ var logger = require("morgan");
 const mongoose = require("mongoose");
 
 var indexRouter = require("./routes/index");
+const clothingRouter = require("./routes/clothing");
 
 var app = express();
 const mongoDB = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.cx538ew.mongodb.net/Inventory?retryWrites=true&w=majority`;
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
+app.use("/clothing", clothingRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
