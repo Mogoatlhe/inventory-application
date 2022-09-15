@@ -10,9 +10,47 @@ html(lang='en')
       .bg-black 
         p.text-white.font-lato.font-black.text-2xl.py-3.px-3 COOLWORTHS
     
+    .h-screen.w-80.border.fixed.bg-white
+      .border-b.font-black.py-4.px-4.grid.grid-cols-12
+        p.col-span-11 FILTER 
+        button
+          svg.w-6.h-6(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
+            path(stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12')
+      .px-4
+        p.mt-5.font-black.text-xs CATEGORIES
+        ul 
+          each categoryDetail in categoryDetails
+            li.mt-5.text-xs
+              a(href="/clothing/category/" + categoryDetail._id) #{categoryDetail.name} (#{categoryDetail.total})
+
+
     .px-3.flex.items-center.flex-col 
       h1.pt-20.font-black.text-xl CLOTHING
-      .flex 
-      
+      .flex.w-full.border.mt-2
+        button.flex.w-full.p-2.border
+          p.w-full Filter
+          svg(
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 24 24"
+            stroke-width="1.5" stroke="currentColor"
+            class="w-6 h-6"
+          )
+            path(
+              stroke-linecap="round" stroke-linejoin="round"
+              d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
+            )
+
+        button.flex.w-full.p-2.border
+          p.w-full Sort By
+          svg(
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 24 24"
+            stroke-width="1.5" stroke="currentColor"
+            class="w-6 h-6"
+          )
+            path(
+              stroke-linecap="round" stroke-linejoin="round"
+              d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
+            )
 
       block content
