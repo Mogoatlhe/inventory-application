@@ -10,7 +10,7 @@ html(lang='en')
       .bg-black 
         p.text-white.font-lato.font-black.text-2xl.py-3.px-3 COOLWORTHS
     
-    .h-screen.w-80.border.fixed.bg-white
+    .hidden.h-screen.w-80.border.fixed.bg-white
       .border-b.font-black.py-4.px-4.grid.grid-cols-12
         p.col-span-11 FILTER 
         button
@@ -18,7 +18,7 @@ html(lang='en')
             path(stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12')
       .px-4
         p.mt-5.font-black.text-xs CATEGORIES
-        ul 
+        ul
           each categoryDetail in categoryDetails
             li.mt-5.text-xs
               a(href="/clothing/category/" + categoryDetail._id) #{categoryDetail.name} (#{categoryDetail.total})
