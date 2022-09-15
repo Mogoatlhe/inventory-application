@@ -1,5 +1,7 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  - var length = items.length
+  
+  .flex.w-full.mt-5 
+    p.font-thin.text-sm.text-slate-800 #{length} item(s) found
