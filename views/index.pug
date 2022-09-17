@@ -3,5 +3,18 @@ extends layout
 block content
   - var length = items.length
   
-  .flex.w-full.mt-5 
+  .flex.w-full.mt-5.justify-between 
     p.font-thin.text-sm.text-slate-800 #{length} item(s) found
+    .flex.items-center.w-12.justify-between 
+      button.w-5.h-5.bg-slate-200
+      .grid.grid-cols-2.gap-1
+        - for(i = 0; i < 4; i++)
+         .w-2.h-2.bg-gray-400
+
+  .grid.grid-cols-2.gap-2.mt-5 
+    each item in items 
+      .w-44.grid.grid-cols-1.place-items-center
+        .w-40.h-64.bg-slate-300.grid.place-items-center
+          p.text-white.font-black No image available
+  //-   else 
+  //-     h1 This category has no items, and may be deleted.
