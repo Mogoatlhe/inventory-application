@@ -13,8 +13,13 @@ block content
 
   .grid.grid-cols-2.gap-2.mt-5 
     each item in items 
-      .w-44.grid.grid-cols-1.place-items-center
-        .w-40.h-64.bg-slate-300.grid.place-items-center
+      .grid.grid-cols-1.place-items-center(
+        class="w-11/12"
+      )
+        .w-full.h-64.bg-slate-300.grid.place-items-center
           p.text-white.font-black No image available
+        .flex.flex-col.pl-2.items-start.pt-4.mb-2.w-full
+          p.text-sm.h-16 #{item.name}
+          p.font-black.font-lato.text-sm R#{item.price}.00
   //-   else 
   //-     h1 This category has no items, and may be deleted.
