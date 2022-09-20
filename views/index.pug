@@ -3,23 +3,32 @@ extends layout
 block content
   - var length = items.length
   
-  .flex.w-full.mt-5.justify-between 
-    p.font-thin.text-sm.text-slate-800 #{length} item(s) found
-    .flex.items-center.w-12.justify-between 
-      button.w-5.h-5.bg-slate-200
-      .grid.grid-cols-2.gap-1
-        - for(i = 0; i < 4; i++)
-         .w-2.h-2.bg-gray-400
+  .flex.w-full.justify-end(class="smd_w-2/3")
+    .flex.w-full.mt-5.justify-between.items-center 
+      p.font-thin.text-sm.text-slate-800 #{length} item(s) found
+      form(action="" method="GET").hidden.smd_block
+        select.p-2.bg-white.border
+          option Sort by 
+          option Price Low-High 
+          option Price High-Low 
+          option Name Z-A 
+          option Name A-Z 
+      //- .flex.items-center.w-12.justify-between 
+      //-   button.w-5.h-5.bg-slate-200
+      //-   .grid.grid-cols-2.gap-1
+      //-     - for(i = 0; i < 4; i++)
+      //-     .w-2.h-2.bg-gray-400
 
-  .grid.grid-cols-2.gap-2.mt-5 
-    each item in items 
-      .grid.grid-cols-1.place-items-center(
-        class="w-11/12"
-      )
-        .w-full.h-64.bg-slate-300.grid.place-items-center
-          p.text-white.font-black No image available
-        .flex.flex-col.pl-2.items-start.pt-4.mb-2.w-full
-          p.text-sm.h-16 #{item.name}
-          p.font-black.font-lato.text-sm R#{item.price}.00
+  .flex.justify-end(class="smd_w-2/3")
+    .grid.grid-cols-2.gap-2.mt-5.md_grid-cols-3.smd_grid-cols-2.lg_grid-cols-3
+      each item in items 
+        .grid.grid-cols-1.place-items-center(
+          class="w-11/12"
+        )
+          .w-full.h-64.sm_h-96.bg-slate-300.grid.place-items-center
+            p.text-white.font-black No image available
+          .flex.flex-col.pl-2.items-start.pt-4.mb-2.w-full
+            p.text-sm.h-16 #{item.name}
+            p.font-black.font-lato.text-sm R#{item.price}.00
   //-   else 
   //-     h1 This category has no items, and may be deleted.
