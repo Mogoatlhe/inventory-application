@@ -25,7 +25,7 @@ html(lang='en')
         ul
           each categoryDetail in categoryDetails
             li.mt-5.text-xs
-              a(href="/clothing/category/" + categoryDetail._id) #{categoryDetail.name} (#{categoryDetail.total})
+              a(href="/clothing/" + categoryDetail._id) #{categoryDetail.name} (#{categoryDetail.total})
 
     .px-3.flex.items-center.flex-col.smd_items-end 
       h1.pt-20.font-black.text-xl.mmd_pt-28(
