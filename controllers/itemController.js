@@ -1,6 +1,7 @@
 const Item = require("../models/item");
 const async = require("async");
 
+let selected;
 exports.index = (req, res, next) => {
   async.series(
     {
@@ -39,10 +40,12 @@ exports.index = (req, res, next) => {
       if (err) {
         return next(err);
       }
+
       res.render("index", {
         title: "Home",
         categoryDetails: results.category_details,
         items: results.items,
+        selected: selected,
       });
     }
   );
@@ -51,12 +54,16 @@ exports.index = (req, res, next) => {
 // helpers
 const setSortType = (sortType) => {
   if (sortType === "Price Low-High") {
+    selected = "Price Low-High";
     return { price: 1 };
   } else if (sortType === "Price High-Low") {
+    selected = "Price High-Low";
     return { price: -1 };
   } else if (sortType === "Name Z-A") {
+    selected = "Name Z-A";
     return { name: -1 };
   } else if (sortType === "Name A-Z") {
+    selected = "Name A-Z";
     return { name: 1 };
   } else {
     return { _id: 1 };
