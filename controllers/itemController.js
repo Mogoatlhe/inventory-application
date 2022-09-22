@@ -5,31 +5,40 @@ let selected;
 exports.index = (req, res, next) => {
   async.series(
     {
-      category_details(callback) {
-        Item.aggregate(
-          [
-            {
-              $lookup: {
-                from: "categories",
-                localField: "category",
-                foreignField: "_id",
-                as: "array",
-              },
-            },
-            {
-              $group: {
-                _id: "$category",
-                total: { $sum: 1 },
-                name: { $first: "$array.name" },
-              },
-            },
-          ],
-          callback
-        );
-      },
+      category_details,
       items(callback) {
         Item.find(
           {},
+          null,
+          { sort: setSortType(req.query.sortSelect) },
+          callback
+        );
+      },
+    },
+    (err, results) => {
+      if (err) {
+        return next(err);
+      }
+
+      res.render("index", {
+        title: "Home",
+        categoryDetails: results.category_details,
+        items: results.items,
+        selected: selected,
+      });
+    }
+  );
+};
+
+exports.items_by_category = (req, res, next) => {
+  const id = req.params.categoryId;
+
+  async.series(
+    {
+      category_details,
+      items(callback) {
+        Item.find(
+          { category: id },
           null,
           { sort: setSortType(req.query.sortSelect) },
           callback
@@ -68,4 +77,30 @@ const setSortType = (sortType) => {
   } else {
     return { _id: 1 };
   }
+};
+
+category_details = (callback) => {
+  Item.aggregate(
+    [
+      {
+        $lookup: {
+          from: "categories",
+          localField: "category",
+          foreignField: "_id",
+          as: "array",
+        },
+      },
+      {
+        $group: {
+          _id: "$category",
+          total: { $sum: 1 },
+          name: { $first: "$array.name" },
+        },
+      },
+      {
+        $sort: { name: 1 },
+      },
+    ],
+    callback
+  );
 };
