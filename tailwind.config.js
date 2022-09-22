@@ -14,7 +14,11 @@ module.exports = {
       mmd: "840px",
       ...defaultTheme.screens,
     },
-    extend: {},
+    extend: {
+      spacing: {
+        33: "33.3333vw",
+      },
+    },
   },
   plugins: [],
   separator: "_",
