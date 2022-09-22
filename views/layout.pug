@@ -59,3 +59,15 @@ html(lang='en')
             )
 
       block content
+  
+  script.
+    function submitSelect(){
+      const form = document.querySelector("form");
+      const sortSelect = document.querySelector("select");
+      const sortOptions = sortSelect.options;
+
+      if(sortOptions.selectedIndex === 0){
+        return;  
+      }
+      form.submit();
+    }

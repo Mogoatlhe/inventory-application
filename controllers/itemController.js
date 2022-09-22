@@ -27,7 +27,12 @@ exports.index = (req, res, next) => {
         );
       },
       items(callback) {
-        Item.find({}, callback);
+        Item.find(
+          {},
+          null,
+          { sort: setSortType(req.query.sortSelect) },
+          callback
+        );
       },
     },
     (err, results) => {
@@ -41,4 +46,19 @@ exports.index = (req, res, next) => {
       });
     }
   );
+};
+
+// helpers
+const setSortType = (sortType) => {
+  if (sortType === "Price Low-High") {
+    return { price: 1 };
+  } else if (sortType === "Price High-Low") {
+    return { price: -1 };
+  } else if (sortType === "Name Z-A") {
+    return { name: -1 };
+  } else if (sortType === "Name A-Z") {
+    return { name: 1 };
+  } else {
+    return { _id: 1 };
+  }
 };

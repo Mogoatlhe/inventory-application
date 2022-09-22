@@ -7,12 +7,15 @@ block content
     .flex.w-full.mt-5.justify-between.items-center 
       p.font-thin.text-sm.text-slate-800 #{length} item(s) found
       form(action="" method="GET").hidden.smd_block
-        select.p-2.bg-white.border
+        select.p-2.bg-white.border(
+          onchange="submitSelect()"
+          name="sortSelect"
+        )
           option Sort by 
-          option Price Low-High 
-          option Price High-Low 
-          option Name Z-A 
-          option Name A-Z 
+          option(value="Price Low-High") Price Low-High 
+          option(value="Price High-Low") Price High-Low 
+          option(value="Name Z-A") Name Z-A 
+          option(value="Name A-Z") Name A-Z 
       //- .flex.items-center.w-12.justify-between 
       //-   button.w-5.h-5.bg-slate-200
       //-   .grid.grid-cols-2.gap-1
