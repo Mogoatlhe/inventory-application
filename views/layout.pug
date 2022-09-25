@@ -26,6 +26,29 @@ html(lang='en')
             li.mt-5.text-xs
               a(href="/clothing/category/" + categoryDetail._id) #{categoryDetail.name} (#{categoryDetail.total})
 
+    .w-screen.fixed.flex.justify-end.smd_hidden.hidden
+      .w-80.h-screen.bg-white
+        .border-b.p-3.grid.grid-cols-12.smd_hidden
+          p.col-span-11.text-center SORT BY 
+          button
+            svg.w-6.h-6(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
+              path(stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12')
+        
+        .flex.flex-col.mt-10.px-6 
+          .flex.align-center.gap-4.py-4.border-b
+            .border.border-2.rounded-full.w-6.h-6 
+            p Price Low-High
+          .flex.align-center.gap-4.py-4.border-b
+            .border.border-2.rounded-full.w-6.h-6 
+            p Price High-Low
+          .flex.align-center.gap-4.py-4.border-b
+            .border.border-2.rounded-full.w-6.h-6
+            p Name Z-A
+          .flex.align-center.gap-4.py-4.border-b
+            .border.border-2.rounded-full.w-6.h-6
+            p Name A-Z
+
+
     .px-3.flex.items-center.flex-col.smd_items-end 
       h1.pt-20.font-black.text-xl.mmd_pt-28(
         class="smd_w-2/3"
