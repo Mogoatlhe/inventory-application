@@ -21,7 +21,7 @@ exports.index = (req, res, next) => {
       }
 
       res.render("index", {
-        title: "Home",
+        title: "Clothing",
         categoryDetails: results.category_details,
         items: results.items,
         selected: selected,
@@ -50,8 +50,12 @@ exports.items_by_category = (req, res, next) => {
         return next(err);
       }
 
+      const currCategory = results.category_details.find(
+        (detail) => id === detail._id.toString()
+      );
+      console.log(currCategory.name);
       res.render("index", {
-        title: "Home",
+        title: currCategory.name,
         categoryDetails: results.category_details,
         items: results.items,
         selected: selected,

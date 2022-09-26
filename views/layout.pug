@@ -52,7 +52,7 @@ html(lang='en')
     .px-3.flex.items-center.flex-col.smd_items-end 
       h1.pt-20.font-black.text-xl.mmd_pt-28(
         class="smd_w-2/3"
-      ) CLOTHING
+      )= title 
       .flex.w-full.border.mt-2.smd_hidden
         button.flex.w-full.p-2.border
           p.w-full Filter
@@ -83,6 +83,9 @@ html(lang='en')
       block content
   
   script.
+    const h1 = document.querySelector("h1");
+    h1.textContent = h1.textContent.toUpperCase(); 
+
     function submitSelect(){
       const form = document.querySelector("form");
       const sortSelect = document.querySelector("select");
