@@ -53,7 +53,7 @@ exports.items_by_category = (req, res, next) => {
       const currCategory = results.category_details.find(
         (detail) => id === detail._id.toString()
       );
-      console.log(currCategory.name);
+
       res.render("index", {
         title: currCategory.name,
         categoryDetails: results.category_details,
