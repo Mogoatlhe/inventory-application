@@ -64,6 +64,20 @@ exports.items_by_category = (req, res, next) => {
   );
 };
 
+exports.item = (req, res, next) => {
+  const id = req.params.itemId;
+  Item.find({ _id: id })
+    .populate("category")
+    .exec(function (err, results) {
+      if (err) {
+        return next(err);
+      }
+
+      console.log(results);
+      res.send("lol");
+    });
+};
+
 // helpers
 const setSortType = (sortType) => {
   if (sortType === "Price Low-High") {
