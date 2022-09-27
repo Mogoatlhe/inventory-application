@@ -1,4 +1,6 @@
 require("dotenv").config();
+require("./models/category");
+require("./models/item");
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
