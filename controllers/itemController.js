@@ -70,7 +70,26 @@ exports.item = (req, res, next) => {
     .populate("category")
     .exec(function (err, results) {
       if (err) {
-        console.log(err);
+        return next(err);
+      }
+
+      res.render("itemDetails", {
+        title: results.name,
+        itemCount: results.count,
+        itemId: id,
+        price: results.price,
+        categoryName: results.category.name,
+        categoryId: results.category._id,
+      });
+    });
+};
+
+exports.item_update_get = (req, res, next) => {
+  const id = req.params.itemId;
+  Item.findOne({ _id: id })
+    .populate("category")
+    .exec(function (err, results) {
+      if (err) {
         return next(err);
       }
 
