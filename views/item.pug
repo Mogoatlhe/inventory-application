@@ -30,13 +30,4 @@ html(lang='en')
         .flex.flex-col.mt-4.px-4.slg_justify-self-end.slg_mr-14(
           class="slg_w-4/5"
         )
-          p.font-black.text-xl.slg_text-4xl= title
-          p.mt-1.text-xl.font-thin R #{price}.00
-          p.font-black.text-sm.mt-4 Description
-          p.font-black.text-sm.mt-3.text-slate-500 Items Available:
-          p.text-sm.mt-1.text-slate-400= itemCount
-          p.font-black.text-sm.mt-3.text-slate-500 Product code:
-          p.text-sm.mt-1.text-slate-400= itemId
-          .grid.grid-cols-1.mt-5 
-            button.mb-3.text-white.font-black.bg-slate-700.py-4 Edit
-            button.mb-10.text-white.font-black.bg-red-400.py-4 Delete
+          block content 
