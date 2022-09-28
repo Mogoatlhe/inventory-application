@@ -66,15 +66,22 @@ exports.items_by_category = (req, res, next) => {
 
 exports.item = (req, res, next) => {
   const id = req.params.itemId;
-  Item.find({ _id: id })
+  Item.findOne({ _id: id })
     .populate("category")
     .exec(function (err, results) {
       if (err) {
+        console.log(err);
         return next(err);
       }
 
-      console.log(results);
-      res.send("lol");
+      res.render("item", {
+        title: results.name,
+        itemCount: results.count,
+        itemId: id,
+        price: results.price,
+        categoryName: results.category.name,
+        categoryId: results.category._id,
+      });
     });
 };
 
