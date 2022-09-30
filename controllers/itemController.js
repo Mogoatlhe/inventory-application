@@ -87,23 +87,33 @@ exports.item = (req, res, next) => {
 
 exports.item_update_get = (req, res, next) => {
   const id = req.params.itemId;
-  Item.findOne({ _id: id })
-    .populate("category")
-    .exec(function (err, results) {
+  async.series(
+    {
+      category_details,
+      getItem(callback) {
+        Item.findOne({ _id: id }).populate("category").exec(callback);
+      },
+    },
+    (err, results) => {
       if (err) {
         console.log(err);
         return next(err);
       }
 
+      const categoryDetails = results.category_details;
+      const currItem = results.getItem;
+
       res.render("itemForm", {
-        title: results.name,
-        itemCount: results.count,
+        title: currItem.name,
+        itemCount: currItem.count,
         itemId: id,
-        price: results.price,
-        categoryName: results.category.name,
-        categoryId: results.category._id,
+        price: currItem.price,
+        categoryName: currItem.category.name,
+        categoryId: currItem.category._id,
+        categories: categoryDetails,
       });
-    });
+    }
+  );
 };
 
 // helpers

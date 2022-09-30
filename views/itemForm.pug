@@ -30,10 +30,13 @@ block content
           name="count"
         )
       label.flex.flex-col.font-black.gap-2 Item category 
-        input.font-normal.border.border-slate-300.p-2.w-80(
-          type="text"
-          value=description
+        select.font-normal.border.border-slate-300.p-2.w-80.bg-white(
           name="category"
         )
+          each category in categories 
+            option= category.name 
+          else 
+            option No categories 
+
       button.mb-3.text-white.font-black.bg-slate-700.py-4
         a.inline-block.w-full.h-full(href="/clothing/item/" + itemId) Submit
