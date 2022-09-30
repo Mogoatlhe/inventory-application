@@ -34,7 +34,9 @@ block content
           name="category"
         )
           each category in categories 
-            option= category.name 
+            option(
+              value=`${category.name}`
+              selected= category.name == currCategory)= category.name 
           else 
             option No categories 
 

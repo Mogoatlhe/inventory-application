@@ -108,7 +108,7 @@ exports.item_update_get = (req, res, next) => {
         itemCount: currItem.count,
         itemId: id,
         price: currItem.price,
-        categoryName: currItem.category.name,
+        currCategory: currItem.category.name,
         categoryId: currItem.category._id,
         categories: categoryDetails,
       });
