@@ -635,16 +635,16 @@ video {
   height: 90vh;
 }
 
+.h-full {
+  height: 100%;
+}
+
 .h-screen {
   height: 100vh;
 }
 
 .h-6 {
   height: 1.5rem;
-}
-
-.h-full {
-  height: 100%;
 }
 
 .w-full {
@@ -745,6 +745,11 @@ video {
 
 .border-b {
   border-bottom-width: 1px;
+}
+
+.border-slate-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(203 213 225 / var(--tw-border-opacity));
 }
 
 .bg-white {
@@ -861,6 +866,10 @@ video {
 
 .font-black {
   font-weight: 900;
+}
+
+.font-normal {
+  font-weight: 400;
 }
 
 .text-slate-800 {
