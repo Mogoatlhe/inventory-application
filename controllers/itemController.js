@@ -1,5 +1,6 @@
 const Item = require("../models/item");
 const async = require("async");
+const { body, validationResult } = require("express-validator");
 
 let selected;
 exports.index = (req, res, next) => {
@@ -90,10 +91,11 @@ exports.item_update_get = (req, res, next) => {
     .populate("category")
     .exec(function (err, results) {
       if (err) {
+        console.log(err);
         return next(err);
       }
 
-      res.render("item", {
+      res.render("itemForm", {
         title: results.name,
         itemCount: results.count,
         itemId: id,
