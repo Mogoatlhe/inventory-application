@@ -1,0 +1,39 @@
+extends item 
+
+block content 
+  form(
+    method="PUT" action=""
+  )
+    .flex.flex-col.gap-2 
+      label.flex.flex-col.font-black.gap-2 Item name 
+        input.font-normal.border.border-slate-300.p-2.w-80(
+          type="text"
+          value=title
+          name="name"
+        )
+      label.flex.flex-col.font-black.gap-2 Item price 
+        input.font-normal.border.border-slate-300.p-2.w-80(
+          type="number"
+          value=price
+          name="price"
+        )
+      label.flex.flex-col.font-black.gap-2 Item description 
+        input.font-normal.border.border-slate-300.p-2.w-80(
+          type="text"
+          value=description
+          name="description"
+        )
+      label.flex.flex-col.font-black.gap-2 Item count 
+        input.font-normal.border.border-slate-300.p-2.w-80(
+          type="number"
+          value=itemCount
+          name="count"
+        )
+      label.flex.flex-col.font-black.gap-2 Item category 
+        input.font-normal.border.border-slate-300.p-2.w-80(
+          type="text"
+          value=description
+          name="category"
+        )
+      button.mb-3.text-white.font-black.bg-slate-700.py-4
+        a.inline-block.w-full.h-full(href="/clothing/item/" + itemId) Submit
