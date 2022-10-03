@@ -75,8 +75,6 @@ exports.item = (req, res, next) => {
         return next(err);
       }
 
-      console.log(results);
-
       res.render("itemDetails", {
         results,
       });
@@ -98,8 +96,10 @@ exports.item_update_get = (req, res, next) => {
         return next(err);
       }
 
+      const getItem = results.getItem.toObject();
       res.render("itemForm", {
         results,
+        getItem,
       });
     }
   );
@@ -137,6 +137,7 @@ exports.item_update_post = [
             return next(err);
           }
 
+          console.log(results.toObject());
           res.render("itemForm", {
             results,
             errors: errors.array(),
