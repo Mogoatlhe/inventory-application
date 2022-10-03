@@ -75,14 +75,10 @@ exports.item = (req, res, next) => {
         return next(err);
       }
 
+      console.log(results);
+
       res.render("itemDetails", {
-        title: results.name,
-        itemCount: results.count,
-        itemId: id,
-        price: results.price,
-        categoryName: results.category.name,
-        categoryId: results.category._id,
-        description: results.description,
+        results,
       });
     });
 };
@@ -98,28 +94,22 @@ exports.item_update_get = (req, res, next) => {
     },
     (err, results) => {
       if (err) {
-        console.log(err);
+        console.log("err");
         return next(err);
       }
 
-      const categoryDetails = results.category_details;
-      const currItem = results.getItem;
-
       res.render("itemForm", {
-        title: currItem.name,
-        itemCount: currItem.count,
-        itemId: id,
-        price: currItem.price,
-        currCategory: currItem.category.name,
-        categoryId: currItem.category._id,
-        categories: categoryDetails,
-        description: currItem.description,
+        results,
       });
     }
   );
 };
 
 exports.item_update_post = [
+  body("name", "item name must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
   (req, res, next) => {
     const errors = validationResult(req);
 
@@ -147,18 +137,8 @@ exports.item_update_post = [
             return next(err);
           }
 
-          const categoryDetails = results.category_details;
-          const currItem = results.getItem;
-
           res.render("itemForm", {
-            title: currItem.name,
-            itemCount: currItem.count,
-            itemId: id,
-            price: currItem.price,
-            currCategory: currItem.category.name,
-            categoryId: currItem.category._id,
-            categories: categoryDetails,
-            description: currItem.description,
+            results,
             errors: errors.array(),
           });
         }

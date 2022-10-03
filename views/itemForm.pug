@@ -2,41 +2,41 @@ extends item
 
 block content 
   form(
-    method="POST" action=`/clothing/item/${itemId}/edit`
+    method="POST" action=`/clothing/item/${results.getItem._id}/edit`
   )
     .flex.flex-col.gap-2 
       label.flex.flex-col.font-black.gap-2 Item name 
         input.font-normal.border.border-slate-300.p-2.w-80(
           type="text"
-          value=title
+          value=results.getItem.name
           name="name"
         )
       label.flex.flex-col.font-black.gap-2 Item price 
         input.font-normal.border.border-slate-300.p-2.w-80(
           type="number"
-          value=price
+          value=results.getItem.price
           name="price"
         )
       label.flex.flex-col.font-black.gap-2 Item description 
         input.font-normal.border.border-slate-300.p-2.w-80(
           type="text"
-          value=description
+          value=results.getItem.description
           name="description"
         )
       label.flex.flex-col.font-black.gap-2 Item count 
         input.font-normal.border.border-slate-300.p-2.w-80(
           type="number"
-          value=itemCount
+          value=results.getItem.count
           name="count"
         )
       label.flex.flex-col.font-black.gap-2 Item category 
         select.font-normal.border.border-slate-300.p-2.w-80.bg-white(
           name="category"
         )
-          each category in categories 
+          each category in results.category_details 
             option(
               value=`${category.name}`
-              selected= category.name == currCategory)= category.name 
+              selected= category.name == results.getItem.category.name)= category.name 
           else 
             option No categories 
 
