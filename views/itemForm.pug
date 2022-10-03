@@ -2,7 +2,7 @@ extends item
 
 block content 
   form(
-    method="PUT" action=""
+    method="POST" action=`/clothing/item/${itemId}/edit`
   )
     .flex.flex-col.gap-2 
       label.flex.flex-col.font-black.gap-2 Item name 
@@ -40,5 +40,4 @@ block content
           else 
             option No categories 
 
-      button.mb-3.text-white.font-black.bg-slate-700.py-4
-        a.inline-block.w-full.h-full(href="/clothing/item/" + itemId) Submit
+      button.mb-3.text-white.font-black.bg-slate-700.py-4 Submit

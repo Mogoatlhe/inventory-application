@@ -1,6 +1,7 @@
 const Item = require("../models/item");
 const async = require("async");
 const { body, validationResult } = require("express-validator");
+const { count } = require("../models/item");
 
 let selected;
 exports.index = (req, res, next) => {
@@ -115,6 +116,66 @@ exports.item_update_get = (req, res, next) => {
     }
   );
 };
+
+exports.item_update_post = [
+  (req, res, next) => {
+    const errors = validationResult(req);
+
+    const id = req.params.itemId;
+    const item = new Item({
+      name: req.body.name,
+      descritption: req.body.descritption,
+      price: req.body.price,
+      category: req.body.category,
+      count: req.body.count,
+      _id: id,
+    });
+
+    if (!errors.isEmpty()) {
+      async.parallel(
+        {
+          category_details,
+          getItem(callback) {
+            Item.findOne({ _id: id }).populate("category").exec(callback);
+          },
+        },
+        (err, results) => {
+          if (err) {
+            console.log(err);
+            return next(err);
+          }
+
+          const categoryDetails = results.category_details;
+          const currItem = results.getItem;
+
+          res.render("itemForm", {
+            title: currItem.name,
+            itemCount: currItem.count,
+            itemId: id,
+            price: currItem.price,
+            currCategory: currItem.category.name,
+            categoryId: currItem.category._id,
+            categories: categoryDetails,
+            errors: errors.array(),
+          });
+        }
+      );
+      return;
+    }
+
+    console.log(id);
+    Item.findByIdAndUpdate(id, item, {}, (err, updateBook) => {
+      console.log("hello");
+      if (err) {
+        console.log(err);
+        return next(err);
+      }
+
+      console.log(id);
+      res.redirect(`/clothing/item/${id}`);
+    });
+  },
+];
 
 // helpers
 const setSortType = (sortType) => {

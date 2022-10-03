@@ -7,5 +7,6 @@ router.get("/", item_Controller.index);
 router.get("/category/:categoryId", item_Controller.items_by_category);
 router.get("/item/:itemId", item_Controller.item);
 router.get("/item/:itemId/edit", item_Controller.item_update_get);
+router.post("/item/:itemId/edit", item_Controller.item_update_post);
 
 module.exports = router;
