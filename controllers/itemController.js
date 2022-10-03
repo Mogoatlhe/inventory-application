@@ -82,6 +82,7 @@ exports.item = (req, res, next) => {
         price: results.price,
         categoryName: results.category.name,
         categoryId: results.category._id,
+        description: results.description,
       });
     });
 };
@@ -112,6 +113,7 @@ exports.item_update_get = (req, res, next) => {
         currCategory: currItem.category.name,
         categoryId: currItem.category._id,
         categories: categoryDetails,
+        description: currItem.description,
       });
     }
   );
@@ -121,7 +123,6 @@ exports.item_update_post = [
   (req, res, next) => {
     const errors = validationResult(req);
 
-    console.log(req.body.description);
     const id = req.params.itemId;
     const item = new Item({
       name: req.body.name,
@@ -157,6 +158,7 @@ exports.item_update_post = [
             currCategory: currItem.category.name,
             categoryId: currItem.category._id,
             categories: categoryDetails,
+            description: currItem.description,
             errors: errors.array(),
           });
         }
@@ -164,15 +166,12 @@ exports.item_update_post = [
       return;
     }
 
-    console.log(id);
     Item.findByIdAndUpdate(id, item, {}, (err, updateBook) => {
-      console.log("hello");
       if (err) {
         console.log(err);
         return next(err);
       }
 
-      console.log(id);
       res.redirect(`/clothing/item/${id}`);
     });
   },
