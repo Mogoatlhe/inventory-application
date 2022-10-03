@@ -121,10 +121,11 @@ exports.item_update_post = [
   (req, res, next) => {
     const errors = validationResult(req);
 
+    console.log(req.body.description);
     const id = req.params.itemId;
     const item = new Item({
       name: req.body.name,
-      descritption: req.body.descritption,
+      description: req.body.description,
       price: req.body.price,
       category: req.body.category,
       count: req.body.count,
