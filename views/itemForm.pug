@@ -7,25 +7,27 @@ block content
     .flex.flex-col.gap-2 
       each val, key in getItem 
         if key !== "_id" && key !== "__v"
-            label.flex.flex-col.font-black.gap-2 Item #{key}
-            if key === "category"
-              select.font-normal.border.border-slate-300.p-2.w-80.bg-white(
-                name=key
-              )
-                each category in results.category_details 
-                  option(
-                    value=`${category.name}`
-                    selected= category.name == getItem.category.name)= category.name 
-                else 
-                  option No categories 
-            else
-              -var inputType = "number"
-              if key !== "count" && key !== "price"
-                -inputType = "text"
-              input.font-normal.border.border-slate-300.p-2.w-80(
-                  type=inputType
-                  value=val
+            label.flex.flex-col.font-black.gap-2
+              span Item #{key}
+                
+              if key === "category"
+                select.font-normal.border.border-slate-300.p-2.w-80.bg-white(
                   name=key
                 )
+                  each category in results.category_details 
+                    option(
+                      value=`${category.name}`
+                      selected= category.name == getItem.category.name)= category.name 
+                  else 
+                    option No categories 
+              else
+                -var inputType = "number"
+                if key !== "count" && key !== "price"
+                  -inputType = "text"
+                input.font-normal.border.border-slate-300.p-2.w-80(
+                    type=inputType
+                    value=val
+                    name=key
+                  )
 
       button.mb-3.text-white.font-black.bg-slate-700.py-4 Submit
