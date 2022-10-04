@@ -119,9 +119,9 @@ exports.item_update_post = [
   body("category")
     .trim()
     .isLength({ min: 1 })
-    .escape()
     .withMessage("item category must not be empty")
-    .custom((value) => getCategoryByName(value)),
+    .custom((value) => getCategoryByName(value))
+    .escape(),
   body("count")
     .isInt({ min: 1 })
     .withMessage("item count must be an integer above 0")
@@ -223,6 +223,7 @@ category_details = (callback) => {
 };
 
 const getCategoryByName = (name) => {
+  console.log(name);
   return Category.findOne({ name: name }).then((category) => {
     if (!category) {
       return Promise.reject("item category does not exist");
