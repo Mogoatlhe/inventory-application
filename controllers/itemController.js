@@ -120,8 +120,7 @@ exports.item_update_post = [
     .trim()
     .isLength({ min: 1 })
     .withMessage("item category must not be empty")
-    .custom((value) => doesCategoryExist(value))
-    .escape(),
+    .custom((value) => doesCategoryExist(value)),
   body("count")
     .isInt({ min: 1 })
     .withMessage("item count must be an integer above 0")
@@ -131,6 +130,7 @@ exports.item_update_post = [
   (req, res, next) => {
     const errors = validationResult(req);
 
+    Category.find;
     const id = req.params.itemId;
     const item = new Item({
       name: req.body.name,
