@@ -17,7 +17,7 @@ html(lang='en')
           href="/"
         ) COOLWORTHS
     
-    .w-screen.fixed.categories-filter
+    .w-screen.fixed.categories-filter.hidden
       .w-80.h-screen.border.bg-white.smd_block.smd_border-0.smd_mt-24.smd_w-33.bg-red
         .border-b.font-black.py-4.px-4.grid.grid-cols-12.smd_hidden
           p.col-span-11 FILTER 
@@ -71,7 +71,7 @@ html(lang='en')
         class="smd_w-2/3"
       )= title 
       .flex.w-full.border.mt-2.smd_hidden
-        button.flex.w-full.p-2.border
+        button.flex.w-full.p-2.border.open-filter-btn
           p.w-full Filter
           svg(
             xmlns="http://www.w3.org/2000/svg"
