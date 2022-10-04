@@ -926,6 +926,10 @@ video {
 }
 
 @media (min-width: 824px) {
+  .smd_m-auto {
+    margin: auto;
+  }
+
   .smd_mt-24 {
     margin-top: 6rem;
   }
@@ -936,6 +940,12 @@ video {
 
   .smd_hidden {
     display: none;
+  }
+
+  .smd_h-max {
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
   }
 
   .smd_w-2\/3 {
@@ -952,6 +962,10 @@ video {
 
   .smd_items-end {
     align-items: flex-end;
+  }
+
+  .smd_overflow-auto {
+    overflow: auto;
   }
 
   .smd_border-0 {
