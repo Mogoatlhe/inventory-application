@@ -1,20 +1,32 @@
 const htmlTag = document.querySelector("html");
 const bodyTag = document.querySelector("body");
-
-htmlTag.classList.remove("m-0", "h-full", "overflow-hidden");
-bodyTag.classList.remove("m-0", "h-full", "overflow-hidden");
-
 const openFilterBtn = document.querySelector(".open-filter-btn");
 const closeFilterBtn = document.querySelector(".close-filter-btn");
 const categoriesFilter = document.querySelector(".categories-filter");
 const closeSortBtn = document.querySelector(".close-sort-btn");
-const itemsSort = document.querySelector(".items-sort");
+const itemsSortMenu = document.querySelector(".items-sort");
 const openSortBtn = document.querySelector(".open-sort-btn");
+
+const enableScroll = () => {
+  htmlTag.classList.remove("m-0", "h-full", "overflow-hidden");
+  bodyTag.classList.remove("m-0", "h-full", "overflow-hidden");
+};
+
+const preventScroll = () => {
+  htmlTag.classList.add("m-0", "h-full", "overflow-hidden");
+  bodyTag.classList.add("m-0", "h-full", "overflow-hidden");
+};
+
+enableScroll();
 
 const hideCategoriesFilter = () => {
   categoriesFilter.classList.add("hidden");
-  htmlTag.classList.remove("m-0", "h-full", "overflow-hidden");
-  bodyTag.classList.remove("m-0", "h-full", "overflow-hidden");
+  enableScroll();
+};
+
+const hideItemsSortMenu = () => {
+  itemsSortMenu.classList.add("hidden");
+  enableScroll();
 };
 
 closeFilterBtn.addEventListener("click", () => {
@@ -30,21 +42,21 @@ categoriesFilter.addEventListener("click", function (e) {
 
 openFilterBtn.addEventListener("click", () => {
   categoriesFilter.classList.remove("hidden");
-  htmlTag.classList.add("m-0", "h-full", "overflow-hidden");
-  bodyTag.classList.add("m-0", "h-full", "overflow-hidden");
+  preventScroll();
 });
 
 closeSortBtn.addEventListener("click", () => {
-  itemsSort.classList.add("hidden");
+  hideItemsSortMenu();
 });
 
 openSortBtn.addEventListener("click", () => {
-  itemsSort.classList.remove("hidden");
+  itemsSortMenu.classList.remove("hidden");
+  preventScroll();
 });
 
-itemsSort.addEventListener("click", function (e) {
+itemsSortMenu.addEventListener("click", function (e) {
   if (e.target !== this) {
     return;
   }
-  itemsSort.classList.add("hidden");
+  hideItemsSortMenu();
 });
