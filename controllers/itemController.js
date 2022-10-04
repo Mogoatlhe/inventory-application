@@ -4,7 +4,6 @@ const async = require("async");
 const { body, validationResult } = require("express-validator");
 
 let selected;
-let newCategoryId;
 exports.index = (req, res, next) => {
   async.series(
     {
