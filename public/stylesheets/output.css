@@ -559,6 +559,10 @@ video {
   grid-column: span 11 / span 11;
 }
 
+.m-0 {
+  margin: 0px;
+}
+
 .mt-5 {
   margin-top: 1.25rem;
 }
@@ -735,6 +739,10 @@ video {
   gap: 1rem;
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }
@@ -789,11 +797,6 @@ video {
 .bg-red-400 {
   --tw-bg-opacity: 1;
   background-color: rgb(248 113 113 / var(--tw-bg-opacity));
-}
-
-.bg-red-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
 }
 
 .p-2 {
