@@ -8,7 +8,7 @@ block content
       each val, key in getItem 
         if key !== "_id" && key !== "__v"
             label.flex.flex-col.font-black.gap-2
-              span Item #{key}
+              span.flex.flex-col Item #{key}
                 if errors
                   each error in errors 
                     if error.param === key 

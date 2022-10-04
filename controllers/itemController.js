@@ -1,7 +1,7 @@
 const Item = require("../models/item");
+const Category = require("../models/category");
 const async = require("async");
 const { body, validationResult } = require("express-validator");
-const { count } = require("../models/item");
 
 let selected;
 exports.index = (req, res, next) => {
@@ -110,6 +110,24 @@ exports.item_update_post = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
+  body("price")
+    .isInt({ min: 100 })
+    .withMessage("item price must be an integer above 99")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("item price must not be empty"),
+  body("category")
+    .trim()
+    .isLength({ min: 1 })
+    .escape()
+    .withMessage("item category must not be empty")
+    .custom((value) => getCategoryByName(value)),
+  body("count")
+    .isInt({ min: 1 })
+    .withMessage("item count must be an integer above 0")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("item count must not be empty"),
   (req, res, next) => {
     const errors = validationResult(req);
 
@@ -202,4 +220,12 @@ category_details = (callback) => {
     ],
     callback
   );
+};
+
+const getCategoryByName = (name) => {
+  return Category.findOne({ name: name }).then((category) => {
+    if (!category) {
+      return Promise.reject("item category does not exist");
+    }
+  });
 };
