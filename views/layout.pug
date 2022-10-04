@@ -17,23 +17,29 @@ html(lang='en')
           href="/"
         ) COOLWORTHS
     
-    .hidden.w-80.h-screen.border.fixed.bg-white.smd_block.smd_border-0.smd_mt-24.smd_w-33.bg-red
+    .w-80.h-screen.border.fixed.bg-white.smd_block.smd_border-0.smd_mt-24.smd_w-33.bg-red
       .border-b.font-black.py-4.px-4.grid.grid-cols-12.smd_hidden
         p.col-span-11 FILTER 
         button
           svg.w-6.h-6(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
             path(stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12')
       .px-4
-        p.mt-5.font-black.text-xs CATEGORIES
+        .flex.items-center.justify-between.pr-4
+          p.mt-5.font-black.text-xs CATEGORIES
+          button
+            svg.w-6.h-6.mt-5(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
+              path(stroke-linecap='round' stroke-linejoin='round' d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z')
+
         ul
           each categoryDetail in categoryDetails
             li.mt-5.text-xs
-              span.flex.items-center.justify-between.pr-40
+              span.flex.items-center.justify-between.pr-4
                 a(
                   href="/clothing/category/" + categoryDetail._id
                 )  #{categoryDetail.name} (#{categoryDetail.total})
-                svg.w-5.h-5(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
-                  path(stroke-linecap='round' stroke-linejoin='round' d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10')
+                button
+                  svg.w-5.h-5(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
+                    path(stroke-linecap='round' stroke-linejoin='round' d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10')
 
 
     .w-screen.fixed.flex.justify-end.smd_hidden.hidden

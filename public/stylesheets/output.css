@@ -763,6 +763,10 @@ video {
   gap: 1rem;
 }
 
+.gap-10 {
+  gap: 2.5rem;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }
@@ -866,6 +870,10 @@ video {
 
 .pr-40 {
   padding-right: 10rem;
+}
+
+.pr-4 {
+  padding-right: 1rem;
 }
 
 .text-center {
@@ -1068,5 +1076,9 @@ video {
 @media (min-width: 1024px) {
   .lg_grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg_pr-40 {
+    padding-right: 10rem;
   }
 }
