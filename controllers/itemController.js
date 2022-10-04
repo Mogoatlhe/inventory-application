@@ -130,50 +130,13 @@ exports.item_update_post = [
   (req, res, next) => {
     const errors = validationResult(req);
 
-    Category.find;
     const id = req.params.itemId;
-    const item = new Item({
-      name: req.body.name,
-      description: req.body.description,
-      price: req.body.price,
-      category: req.body.category,
-      count: req.body.count,
-      _id: id,
-    });
-
     if (!errors.isEmpty()) {
-      async.parallel(
-        {
-          category_details,
-          getItem(callback) {
-            Item.findOne({ _id: id }).populate("category").exec(callback);
-          },
-        },
-        (err, results) => {
-          if (err) {
-            console.log(err);
-            return next(err);
-          }
-
-          const getItem = results.getItem.toObject();
-          res.render("itemForm", {
-            results,
-            getItem,
-            errors: errors.array(),
-          });
-        }
-      );
+      handleUpdateErrors(res, errors, id);
       return;
     }
 
-    Item.findByIdAndUpdate(id, item, {}, (err, updateBook) => {
-      if (err) {
-        console.log(err);
-        return next(err);
-      }
-
-      res.redirect(`/clothing/item/${id}`);
-    });
+    updateItem(req, res, next, id);
   },
 ];
 
@@ -227,5 +190,57 @@ const doesCategoryExist = (name) => {
     if (!category) {
       return Promise.reject("item category does not exist");
     }
+  });
+};
+
+const handleUpdateErrors = (res, errors, id) => {
+  async.parallel(
+    {
+      category_details,
+      getItem(callback) {
+        Item.findOne({ _id: id }).populate("category").exec(callback);
+      },
+    },
+    (err, results) => {
+      if (err) {
+        console.log(err);
+        return next(err);
+      }
+
+      const getItem = results.getItem.toObject();
+      res.render("itemForm", {
+        results,
+        getItem,
+        errors: errors.array(),
+      });
+    }
+  );
+};
+
+const updateItem = (req, res, next, id) => {
+  Category.findOne({ name: req.body.category }, "_id", (err, result) => {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+    const categoryId = result._id.toString();
+
+    const item = new Item({
+      name: req.body.name,
+      description: req.body.description,
+      price: req.body.price,
+      category: categoryId,
+      count: req.body.count,
+      _id: id,
+    });
+
+    Item.findByIdAndUpdate(id, item, {}, (err) => {
+      if (err) {
+        console.log(err);
+        return next(err);
+      }
+
+      res.redirect(`/clothing/item/${id}`);
+    });
   });
 };
