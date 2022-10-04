@@ -92,7 +92,7 @@ exports.item_update_get = (req, res, next) => {
     },
     (err, results) => {
       if (err) {
-        console.log("err");
+        console.log(err);
         return next(err);
       }
 
