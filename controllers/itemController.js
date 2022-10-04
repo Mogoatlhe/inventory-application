@@ -4,6 +4,7 @@ const async = require("async");
 const { body, validationResult } = require("express-validator");
 
 let selected;
+let newCategoryId;
 exports.index = (req, res, next) => {
   async.series(
     {
@@ -120,7 +121,7 @@ exports.item_update_post = [
     .trim()
     .isLength({ min: 1 })
     .withMessage("item category must not be empty")
-    .custom((value) => getCategoryByName(value))
+    .custom((value) => doesCategoryExist(value))
     .escape(),
   body("count")
     .isInt({ min: 1 })
@@ -222,8 +223,7 @@ category_details = (callback) => {
   );
 };
 
-const getCategoryByName = (name) => {
-  console.log(name);
+const doesCategoryExist = (name) => {
   return Category.findOne({ name: name }).then((category) => {
     if (!category) {
       return Promise.reject("item category does not exist");
