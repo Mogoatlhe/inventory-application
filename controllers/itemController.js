@@ -137,9 +137,10 @@ exports.item_update_post = [
             return next(err);
           }
 
-          console.log(results.toObject());
+          const getItem = results.getItem.toObject();
           res.render("itemForm", {
             results,
+            getItem,
             errors: errors.array(),
           });
         }

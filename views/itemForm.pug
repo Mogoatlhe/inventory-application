@@ -2,14 +2,18 @@ extends item
 
 block content 
   form(
-    method="POST" action=`/clothing/item/${results.getItem._id}/edit`
+    method="POST" action=`/clothing/item/${getItem._id}/edit`
   )
     .flex.flex-col.gap-2 
       each val, key in getItem 
         if key !== "_id" && key !== "__v"
             label.flex.flex-col.font-black.gap-2
               span Item #{key}
-                
+                if errors
+                  each error in errors 
+                    if error.param === key 
+                      span.ml-2.text-sm.font-thin.text-red-400= error.msg
+
               if key === "category"
                 select.font-normal.border.border-slate-300.p-2.w-80.bg-white(
                   name=key
