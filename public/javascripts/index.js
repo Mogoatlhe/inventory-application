@@ -71,4 +71,9 @@ for (const sortType of sortTypes) {
   if (sortType.textContent === sortTypeSelect.value) {
     circle.classList.add("border-green-300");
   }
+
+  sortType.addEventListener("click", () => {
+    sortTypeSelect.value = sortType.textContent;
+    sortTypeSelect.dispatchEvent(new Event("change"));
+  });
 }
