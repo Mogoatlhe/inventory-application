@@ -18,6 +18,16 @@ exports.category_create = [
       handleCreateErrors(res, req, errors);
       return;
     }
+
+    const category = new Category({ name: req.body.name });
+    category.save((err) => {
+      if (err) {
+        console.log(err);
+        return next(err);
+      }
+
+      handleCreateErrors(res, req, errors);
+    });
   },
 ];
 
