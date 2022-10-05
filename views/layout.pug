@@ -27,11 +27,11 @@ html.m-0.h-full.overflow-hidden.smd_overflow-auto.smd_m-auto.smd_h-max(lang='en'
         .px-4
           .flex.items-center.justify-between.pr-4
             p.mt-5.font-black.text-xs CATEGORIES
-            button
+            button#toggle-category-form
               svg.w-6.h-6.mt-5(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
                 path(stroke-linecap='round' stroke-linejoin='round' d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z')
 
-          form.text-sm.flex.flex-col.py-2.gap-2(action="")
+          form.text-sm.flex.flex-col.py-2.gap-2.hidden#category-form(action="")
             label New category name
               input.font-normal.border.border-slate-300.p-1.my-2.w-60.bg-white(type="text")
             button.text-white.font-black.bg-slate-700.py-2.w-60 Submit

@@ -6,6 +6,8 @@ const categoriesFilter = document.querySelector(".categories-filter");
 const closeSortBtn = document.querySelector(".close-sort-btn");
 const itemsSortMenu = document.querySelector(".items-sort");
 const openSortBtn = document.querySelector(".open-sort-btn");
+const categoryForm = document.querySelector("#category-form");
+const toggleCategoryForm = document.querySelector("#toggle-category-form");
 
 const enableScroll = () => {
   htmlTag.classList.remove("m-0", "h-full", "overflow-hidden");
@@ -20,6 +22,9 @@ const preventScroll = () => {
 enableScroll();
 
 const hideCategoriesFilter = () => {
+  if (toggleCategoryForm.classList.contains("categories-form-visible")) {
+    toggleCategoryForm.click();
+  }
   categoriesFilter.classList.add("hidden");
   enableScroll();
 };
@@ -77,3 +82,13 @@ for (const sortType of sortTypes) {
     sortTypeSelect.dispatchEvent(new Event("change"));
   });
 }
+
+toggleCategoryForm.addEventListener("click", () => {
+  if (categoryForm.classList.contains("hidden")) {
+    categoryForm.classList.remove("hidden");
+    toggleCategoryForm.classList.add("categories-form-visible");
+  } else {
+    categoryForm.classList.add("hidden");
+    toggleCategoryForm.classList.remove("categories-form-visible");
+  }
+});
