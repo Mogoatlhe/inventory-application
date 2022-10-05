@@ -8,6 +8,8 @@ const itemsSortMenu = document.querySelector(".items-sort");
 const openSortBtn = document.querySelector(".open-sort-btn");
 const categoryForm = document.querySelector("#category-form");
 const toggleCategoryForm = document.querySelector("#toggle-category-form");
+const dcirclePlus = "M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z";
+const dcircleMinus = "M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z";
 
 const enableScroll = () => {
   htmlTag.classList.remove("m-0", "h-full", "overflow-hidden");
@@ -83,12 +85,15 @@ for (const sortType of sortTypes) {
   });
 }
 
+const path = toggleCategoryForm.firstChild.firstChild;
 toggleCategoryForm.addEventListener("click", () => {
   if (categoryForm.classList.contains("hidden")) {
     categoryForm.classList.remove("hidden");
     toggleCategoryForm.classList.add("categories-form-visible");
+    path.setAttribute("d", dcircleMinus);
   } else {
     categoryForm.classList.add("hidden");
     toggleCategoryForm.classList.remove("categories-form-visible");
+    path.setAttribute("d", dcirclePlus);
   }
 });
