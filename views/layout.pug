@@ -51,19 +51,12 @@ html.m-0.h-full.overflow-hidden.smd_overflow-auto.smd_m-auto.smd_h-max(lang='en'
             svg.w-6.h-6(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
               path(stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12')
         
+        - const sortTypes = ["Price Low-High", "Price High-Low", "Name Z-A", "Name A-Z"]
         .flex.flex-col.mt-10.px-6 
-          .flex.align-center.gap-4.py-4.border-b
-            .border.border-2.rounded-full.w-6.h-6 
-            p Price Low-High
-          .flex.align-center.gap-4.py-4.border-b
-            .border.border-2.rounded-full.w-6.h-6 
-            p Price High-Low
-          .flex.align-center.gap-4.py-4.border-b
-            .border.border-2.rounded-full.w-6.h-6
-            p Name Z-A
-          .flex.align-center.gap-4.py-4.border-b
-            .border.border-2.rounded-full.w-6.h-6
-            p Name A-Z
+          each sortType in sortTypes
+            .flex.align-center.gap-4.py-4.border-b.cursor-pointer
+              .border.border-2.rounded-full.w-6.h-6 
+              p= sortType
 
 
     .px-3.flex.items-center.flex-col.smd_items-end 
