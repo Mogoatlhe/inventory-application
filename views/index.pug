@@ -7,7 +7,7 @@ block content
     .flex.w-full.mt-5.justify-between.items-center 
       p.font-thin.text-sm.text-slate-800 #{length} item(s) found
       form(action="" method="GET").hidden.smd_block
-        select.p-2.bg-white.border(
+        select.p-2.bg-white.border#sort-type-select(
           onchange="submitSelect()"
           name="sortSelect"
         )

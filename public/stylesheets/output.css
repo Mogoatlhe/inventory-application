@@ -768,6 +768,16 @@ video {
   border-color: rgb(203 213 225 / var(--tw-border-opacity));
 }
 
+.border-green-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(74 222 128 / var(--tw-border-opacity));
+}
+
+.border-green-300 {
+  --tw-border-opacity: 1;
+  border-color: rgb(134 239 172 / var(--tw-border-opacity));
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -958,6 +968,10 @@ video {
 
   .smd_w-33 {
     width: 33.3333vw;
+  }
+
+  .smd_w-80 {
+    width: 20rem;
   }
 
   .smd_grid-cols-2 {

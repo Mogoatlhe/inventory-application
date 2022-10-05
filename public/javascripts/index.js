@@ -60,3 +60,15 @@ itemsSortMenu.addEventListener("click", function (e) {
   }
   hideItemsSortMenu();
 });
+
+const sortTypeSelect = document.querySelector("#sort-type-select");
+const sortTypes = document.querySelectorAll(".sort-type p");
+
+for (const sortType of sortTypes) {
+  const circle = sortType.previousSibling;
+
+  circle.classList.remove("border-green-300");
+  if (sortType.textContent === sortTypeSelect.value) {
+    circle.classList.add("border-green-300");
+  }
+}
