@@ -2,7 +2,6 @@ const Item = require("../models/item");
 const Category = require("../models/category");
 const async = require("async");
 const { body, validationResult } = require("express-validator");
-const { Model } = require("mongoose");
 
 let selected;
 exports.index = (req, res, next) => {
