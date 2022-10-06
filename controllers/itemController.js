@@ -27,7 +27,7 @@ exports.index = (req, res, next) => {
         categoryDetails: results.category_info,
         items: results.items,
         selected: selected,
-        errors: [],
+        errors: JSON.stringify([]),
       });
     }
   );
