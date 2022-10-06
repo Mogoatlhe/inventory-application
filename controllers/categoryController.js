@@ -106,7 +106,7 @@ const handleCreateErrors = (res, req, errors) => {
         categoryDetails: results.category_info,
         items: results.items,
         selected: selected,
-        errors: errors.array(),
+        errors: JSON.stringify(errors.array()),
       });
     }
   );
