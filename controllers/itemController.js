@@ -2,12 +2,13 @@ const Item = require("../models/item");
 const Category = require("../models/category");
 const async = require("async");
 const { body, validationResult } = require("express-validator");
+const { Model } = require("mongoose");
 
 let selected;
 exports.index = (req, res, next) => {
   async.series(
     {
-      category_details,
+      category_info,
       items(callback) {
         Item.find(
           {},
@@ -24,9 +25,10 @@ exports.index = (req, res, next) => {
 
       res.render("index", {
         title: "Clothing",
-        categoryDetails: results.category_details,
+        categoryDetails: results.category_info,
         items: results.items,
         selected: selected,
+        errors: [],
       });
     }
   );
@@ -37,7 +39,7 @@ exports.items_by_category = (req, res, next) => {
 
   async.series(
     {
-      category_details,
+      category_info,
       items(callback) {
         Item.find(
           { category: id },
@@ -52,13 +54,13 @@ exports.items_by_category = (req, res, next) => {
         return next(err);
       }
 
-      const currCategory = results.category_details.find(
+      const currCategory = results.category_info.find(
         (detail) => id === detail._id.toString()
       );
 
       res.render("index", {
         title: currCategory.name,
-        categoryDetails: results.category_details,
+        categoryDetails: results.category_info,
         items: results.items,
         selected: selected,
       });
@@ -85,7 +87,7 @@ exports.item_update_get = (req, res, next) => {
   const id = req.params.itemId;
   async.series(
     {
-      category_details,
+      category_info,
       getItem(callback) {
         Item.findOne({ _id: id }).populate("category").exec(callback);
       },
@@ -159,22 +161,20 @@ const setSortType = (sortType) => {
   }
 };
 
-category_details = (callback) => {
-  Item.aggregate(
+category_info = (callback) => {
+  Category.aggregate(
     [
       {
         $lookup: {
-          from: "categories",
-          localField: "category",
-          foreignField: "_id",
+          from: "items",
+          localField: "_id",
+          foreignField: "category",
           as: "array",
         },
       },
       {
-        $group: {
-          _id: "$category",
-          total: { $sum: 1 },
-          name: { $first: "$array.name" },
+        $addFields: {
+          total: { $size: "$array" },
         },
       },
       {
@@ -196,7 +196,7 @@ const doesCategoryExist = (name) => {
 const handleUpdateErrors = (res, errors, id) => {
   async.parallel(
     {
-      category_details,
+      category_info,
       getItem(callback) {
         Item.findOne({ _id: id }).populate("category").exec(callback);
       },

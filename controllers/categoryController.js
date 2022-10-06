@@ -50,22 +50,20 @@ const setSortType = (sortType) => {
   }
 };
 
-category_details = (callback) => {
-  Item.aggregate(
+category_info = (callback) => {
+  Category.aggregate(
     [
       {
         $lookup: {
-          from: "categories",
-          localField: "category",
-          foreignField: "_id",
+          from: "items",
+          localField: "_id",
+          foreignField: "category",
           as: "array",
         },
       },
       {
-        $group: {
-          _id: "$category",
-          total: { $sum: 1 },
-          name: { $first: "$array.name" },
+        $addFields: {
+          total: { $size: "$array" },
         },
       },
       {
@@ -87,7 +85,7 @@ const doesCategoryExist = (name) => {
 const handleCreateErrors = (res, req, errors) => {
   async.series(
     {
-      category_details,
+      category_info,
       items(callback) {
         Item.find(
           {},
@@ -105,7 +103,7 @@ const handleCreateErrors = (res, req, errors) => {
 
       res.render("index", {
         title: "Clothing",
-        categoryDetails: results.category_details,
+        categoryDetails: results.category_info,
         items: results.items,
         selected: selected,
         errors: errors.array(),
