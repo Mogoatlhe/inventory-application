@@ -32,7 +32,7 @@ html.m-0.h-full.overflow-hidden.smd_overflow-auto.smd_m-auto.smd_h-max(lang='en'
                 path(stroke-linecap='round' stroke-linejoin='round' d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z')
 
           form.text-sm.flex.flex-col.py-2.gap-2.hidden#category-form(
-            action=""
+            action="/clothing"
             method="post"
             )
             label 
@@ -84,7 +84,7 @@ html.m-0.h-full.overflow-hidden.smd_overflow-auto.smd_m-auto.smd_h-max(lang='en'
       )= title 
       .flex.w-full.border.mt-2.smd_hidden
         button.flex.w-full.p-2.border.open-filter-btn
-          p.w-full Filter
+          span.w-full Filter
           svg(
             xmlns="http://www.w3.org/2000/svg"
             fill="none" viewBox="0 0 24 24"
@@ -97,7 +97,7 @@ html.m-0.h-full.overflow-hidden.smd_overflow-auto.smd_m-auto.smd_h-max(lang='en'
             )
 
         button.flex.w-full.p-2.border.open-sort-btn
-          p.w-full Sort By
+          span.w-full Sort By
           svg(
             xmlns="http://www.w3.org/2000/svg"
             fill="none" viewBox="0 0 24 24"
@@ -115,23 +115,23 @@ html.m-0.h-full.overflow-hidden.smd_overflow-auto.smd_m-auto.smd_h-max(lang='en'
       src="./javascripts/index.js"
     )
   
-  script.
-    const h1 = document.querySelector("h1");
-    h1.textContent = h1.textContent.toUpperCase(); 
+    script.
+      const h1 = document.querySelector("h1");
+      h1.textContent = h1.textContent.toUpperCase(); 
 
-    function submitSelect(){
-      const form = document.querySelector("form");
-      const sortSelect = document.querySelector("select");
-      const sortOptions = sortSelect.options;
+      function submitSelect(){
+        const form = document.querySelector("form");
+        const sortSelect = document.querySelector("select");
+        const sortOptions = sortSelect.options;
 
-      if(sortOptions.selectedIndex === 0){
-        return;  
+        if(sortOptions.selectedIndex === 0){
+          return;  
+        }
+        form.submit();
       }
-      form.submit();
-    }
-    
-    const errors = !{errors};
-    if(errors && errors.length > 0){
-      document.querySelector(".open-filter-btn").click();
-      document.querySelector("#toggle-category-form").click();
-    }
+      
+      const errors = !{errors};
+      if(errors && errors.length > 0){
+        document.querySelector(".open-filter-btn").click();
+        document.querySelector("#toggle-category-form").click();
+      }
