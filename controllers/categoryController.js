@@ -31,6 +31,18 @@ exports.category_create = [
   },
 ];
 
+exports.category_delete = (req, res, next) => {
+  console.log("hello");
+  Category.findByIdAndRemove(req.params.id, (error, results) => {
+    if (error) {
+      console.log(err);
+      return next(err);
+    }
+
+    res.redirect("/clothing");
+  });
+};
+
 // helpers
 const setSortType = (sortType) => {
   if (sortType === "Price Low-High") {
