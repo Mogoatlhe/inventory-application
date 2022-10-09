@@ -97,3 +97,9 @@ toggleCategoryForm.addEventListener("click", () => {
     path.setAttribute("d", dcirclePlus);
   }
 });
+
+const editCategoryBtns = document.querySelectorAll(".edit-category-btn");
+
+for (const editCategoryBtn of editCategoryBtns) {
+  editCategoryBtn.addEventListener("click", function () {});
+}
