@@ -100,6 +100,12 @@ toggleCategoryForm.addEventListener("click", () => {
 
 const editCategoryBtns = document.querySelectorAll(".edit-category-btn");
 
+const hideCategoryEdit = (buttonsParent, categoriesAchorTag, formContainer) => {
+  buttonsParent.classList.remove("hidden");
+  categoriesAchorTag.classList.remove("hidden");
+  formContainer.classList.add("hidden");
+};
+
 const cancelCategoryEdit = (
   button,
   buttonsParent,
@@ -107,14 +113,27 @@ const cancelCategoryEdit = (
   formContainer
 ) => {
   button.addEventListener("click", () => {
-    buttonsParent.classList.remove("hidden");
-    categoriesAchorTag.classList.remove("hidden");
-    formContainer.classList.add("hidden");
+    hideCategoryEdit(buttonsParent, categoriesAchorTag, formContainer);
   });
+};
+
+const hideInactiveCategoryForms = (currEditCategoryBtn) => {
+  for (const editCategoryBtn of editCategoryBtns) {
+    if (currEditCategoryBtn === editCategoryBtn) {
+      continue;
+    }
+
+    const buttonsParent = editCategoryBtn.parentElement;
+    const formContainer = buttonsParent.previousSibling;
+    const categoriesAchorTag = formContainer.previousSibling;
+
+    hideCategoryEdit(buttonsParent, categoriesAchorTag, formContainer);
+  }
 };
 
 for (const editCategoryBtn of editCategoryBtns) {
   editCategoryBtn.addEventListener("click", function () {
+    hideInactiveCategoryForms(this);
     const buttonsParent = this.parentElement;
     const formContainer = buttonsParent.previousSibling;
     const categoriesAchorTag = formContainer.previousSibling;
