@@ -28,6 +28,14 @@ const hideCategoriesFilter = () => {
     toggleCategoryForm.click();
   }
   categoriesFilter.classList.add("hidden");
+  const cancelCategoryEditBtn = document.querySelector(
+    ".cancel-category-edit-btn"
+  );
+
+  if (cancelCategoryEditBtn) {
+    cancelCategoryEditBtn.click();
+  }
+
   enableScroll();
 };
 
@@ -114,6 +122,7 @@ const cancelCategoryEdit = (
 ) => {
   button.addEventListener("click", () => {
     hideCategoryEdit(buttonsParent, categoriesAchorTag, formContainer);
+    button.classList.remove("cancel-category-edit-btn");
   });
 };
 
@@ -128,6 +137,7 @@ const hideInactiveCategoryForms = (currEditCategoryBtn) => {
     const categoriesAchorTag = formContainer.previousSibling;
 
     hideCategoryEdit(buttonsParent, categoriesAchorTag, formContainer);
+    formContainer.lastChild.classList.remove("cancel-category-edit-btn");
   }
 };
 
@@ -141,6 +151,7 @@ for (const editCategoryBtn of editCategoryBtns) {
     buttonsParent.classList.add("hidden");
     categoriesAchorTag.classList.add("hidden");
     formContainer.classList.remove("hidden");
+    formContainer.lastChild.classList.add("cancel-category-edit-btn");
 
     cancelCategoryEdit(
       formContainer.lastChild,
