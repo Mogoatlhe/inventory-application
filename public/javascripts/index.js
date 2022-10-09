@@ -100,6 +100,34 @@ toggleCategoryForm.addEventListener("click", () => {
 
 const editCategoryBtns = document.querySelectorAll(".edit-category-btn");
 
+const cancelCategoryEdit = (
+  button,
+  buttonsParent,
+  categoriesAchorTag,
+  formContainer
+) => {
+  button.addEventListener("click", () => {
+    buttonsParent.classList.remove("hidden");
+    categoriesAchorTag.classList.remove("hidden");
+    formContainer.classList.add("hidden");
+  });
+};
+
 for (const editCategoryBtn of editCategoryBtns) {
-  editCategoryBtn.addEventListener("click", function () {});
+  editCategoryBtn.addEventListener("click", function () {
+    const buttonsParent = this.parentElement;
+    const formContainer = buttonsParent.previousSibling;
+    const categoriesAchorTag = formContainer.previousSibling;
+
+    buttonsParent.classList.add("hidden");
+    categoriesAchorTag.classList.add("hidden");
+    formContainer.classList.remove("hidden");
+
+    cancelCategoryEdit(
+      formContainer.lastChild,
+      buttonsParent,
+      categoriesAchorTag,
+      formContainer
+    );
+  });
 }
