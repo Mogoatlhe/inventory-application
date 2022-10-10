@@ -61,14 +61,19 @@ exports.category_update = [
         return;
       }
 
-      const category = new Category({ name: req.body.categoryName });
-      Category.findByIdAndUpdate(req.body.categoryId, category, {}, (err) => {
-        if (err) {
-          return next(err);
-        }
+      Category.findByIdAndUpdate(
+        req.body.categoryId,
+        { name: req.body.categoryName },
+        (err) => {
+          if (err) {
+            console.log(err);
+            return next(err);
+          }
 
-        handleCreateErrors(res, req, errors, req.body.editBtn);
-      });
+          res.redirect("/clothing");
+          // handleCreateErrors(res, req, errors, req.body.editBtn);
+        }
+      );
     });
   },
 ];
