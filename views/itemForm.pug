@@ -1,8 +1,11 @@
 extends item 
 
 block content 
+  - let path=`/clothing/item/create`;
+  if(getItem.category.length > 0)
+    - path= `/clothing/item/${getItem._id}/edit`
   form(
-    method="POST" action=`/clothing/item/${getItem._id}/edit`
+    method="POST" action=`${path}`
   )
     .flex.flex-col.gap-2 
       each val, key in getItem 

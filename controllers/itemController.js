@@ -142,6 +142,78 @@ exports.item_update_post = [
   },
 ];
 
+exports.item_create_get = (req, res, next) => {
+  async.parallel({ category_info }, (err, results) => {
+    if (err) {
+      console.log(err);
+      return next(err);
+    }
+
+    results.name = "Add new item";
+
+    const getItem = {
+      name: "",
+      price: 0,
+      description: "",
+      count: 0,
+      category: "",
+    };
+
+    res.render("itemForm", { results: results, getItem: getItem });
+  });
+};
+
+exports.item_create_post = [
+  body("name", "item name must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("price")
+    .isInt({ min: 100 })
+    .withMessage("item price must be an integer above 99")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("item price must not be empty"),
+  body("category")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("item category must not be empty")
+    .custom((value) => doesCategoryExist(value)),
+  body("count")
+    .isInt({ min: 1 })
+    .withMessage("item count must be an integer above 0")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("item count must not be empty"),
+  (req, res, next) => {
+    async.parallel({ category_info }, (err, results) => {
+      if (err) {
+        console.log(err);
+        return next(err);
+      }
+
+      const errors = validationResult(req);
+      const newErrors = errors.isEmpty() ? [] : errors.array();
+
+      results.name = "Add new item";
+
+      const getItem = {
+        name: "",
+        price: 0,
+        description: "",
+        count: 0,
+        category: "",
+      };
+
+      res.render("itemForm", {
+        results: results,
+        getItem: getItem,
+        errors: newErrors,
+      });
+    });
+  },
+];
+
 // helpers
 const setSortType = (sortType) => {
   if (sortType === "Price Low-High") {

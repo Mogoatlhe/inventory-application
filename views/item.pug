@@ -22,12 +22,13 @@ html(lang='en')
         ) COOLWORTHS
 
     .w-screen.pt-20 
-      if results.category
-        a.text-sm.font-black.pl-2.slg_pl-10(
-          href="/clothing/category/" + results.category._id)  #{results.category.name}
-      else
-        a.text-sm.font-black.pl-2.slg_pl-10(
-          href="/clothing/category/" + results.getItem.category._id)  #{results.getItem.category.name}
+      if(results.category || (results.getItem && results.getItem.category._id))
+        if results.category
+          a.text-sm.font-black.pl-2.slg_pl-10(
+            href="/clothing/category/" + results.category._id)  #{results.category.name}
+        else
+          a.text-sm.font-black.pl-2.slg_pl-10(
+            href="/clothing/category/" + results.getItem.category._id)  #{results.getItem.category.name}
       .grid.grid-cols-1.slg_grid-cols-2.slg_px-10.slg_gap-10
         .w-full.mt-4
           .w-full.bg-slate-300.grid.place-items-center(
