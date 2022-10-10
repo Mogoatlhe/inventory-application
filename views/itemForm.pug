@@ -18,12 +18,13 @@ block content
                 select.font-normal.border.border-slate-300.p-2.w-80.bg-white(
                   name=key
                 )
-                  each category in results.category_details 
-                    option(
-                      value=`${category.name}`
-                      selected= category.name == getItem.category.name)= category.name 
-                  else 
-                    option No categories 
+                  if(results.category_info)
+                    each category in results.category_info 
+                      option(
+                        value=`${category.name}`
+                        selected= category.name == getItem.category.name)= category.name 
+                    else 
+                      option No categories 
               else
                 -var inputType = "number"
                 if key !== "count" && key !== "price"
