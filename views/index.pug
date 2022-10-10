@@ -4,8 +4,11 @@ block content
   - var length = items.length
   
   .flex.w-full.justify-end(class="smd_w-2/3")
-    .flex.w-full.mt-5.justify-between.items-center 
-      p.font-thin.text-sm.text-slate-800 #{length} item(s) found
+    .flex.w-full.mt-5.justify-between.items-center
+      .flex.items-center.w-full.justify-between.smd_flex-col.smd_w-min.smd_gap-2 
+        p.font-thin.text-sm.text-slate-800 #{length} item(s) found
+        form(action="" method="get")
+          input.text-white.font-black.bg-slate-700.p-2.text-sm.cursor-pointer(type="submit" value="add new item") 
       form(action="/clothing" method="GET").hidden.smd_block#sort-form
         select.p-2.bg-white.border#sort-type-select(
           onchange="submitSelect()"

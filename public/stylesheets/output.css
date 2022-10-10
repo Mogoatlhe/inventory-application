@@ -1027,12 +1027,26 @@ video {
     width: 33.3333vw;
   }
 
+  .smd_w-min {
+    width: -webkit-min-content;
+    width: -moz-min-content;
+    width: min-content;
+  }
+
   .smd_grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .smd_flex-col {
+    flex-direction: column;
+  }
+
   .smd_items-end {
     align-items: flex-end;
+  }
+
+  .smd_gap-2 {
+    gap: 0.5rem;
   }
 
   .smd_overflow-auto {
