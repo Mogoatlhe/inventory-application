@@ -1,148 +1,147 @@
-doctype html
-html.m-0.h-full.overflow-hidden.smd_overflow-auto.smd_m-auto.smd_h-max(lang='en')
-  head
-    title= title
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='/stylesheets/output.css')
-    link(rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png')
-    link(rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png')
-    link(rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png')
-    link(rel='manifest' href='/site.webmanifest')
-  body.m-0.h-full.overflow-hidden.smd_overflow-auto.smd_m-auto.smd_h-max
-    header.fixed.w-screen
-      .bg-black.mmd_bg-white.py-3.px-3.smd_px-24.mmd_border-b 
-        a.text-white.font-lato.font-black.text-2xl.smd_text-xl(
-          class="mmd_text-black mmd_text-3xl mmd_px-10 mmd_py-5"
-          href="/"
-        ) COOLWORTHS
-    
-    .w-screen.fixed.categories-filter.hidden.smd_block.smd_w-80
-      .w-80.h-screen.border.bg-white.smd_block.smd_border-0.smd_mt-24.smd_w-33.bg-red
-        .border-b.font-black.py-4.px-4.grid.grid-cols-12.smd_hidden
-          p.col-span-11 FILTER 
-          button.close-filter-btn
-            svg.w-6.h-6(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
-              path(stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12')
-        .px-4
-          .flex.items-center.justify-between.pr-4
-            p.mt-5.font-black.text-xs CATEGORIES
-            button#toggle-category-form
-              svg.w-6.h-6.mt-5(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
-                path(stroke-linecap='round' stroke-linejoin='round' d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z')
+extends header 
 
-          form.text-sm.flex.flex-col.py-2.gap-2.hidden#category-form(
-            action="/clothing"
-            method="post"
-            )
-            label 
-              span.flex New category name
-              if errors 
-                - const newErrors = JSON.parse(errors);
+block layout
+    
+  .w-screen.fixed.categories-filter.hidden.smd_block.smd_w-80
+    .w-80.h-screen.border.bg-white.smd_block.smd_border-0.smd_mt-24.smd_w-33.bg-red
+      .border-b.font-black.py-4.px-4.grid.grid-cols-12.smd_hidden
+        p.col-span-11 FILTER 
+        button.close-filter-btn
+          svg.w-6.h-6(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
+            path(stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12')
+      .px-4
+        .flex.items-center.justify-between.pr-4
+          p.mt-5.font-black.text-xs CATEGORIES
+          button#toggle-category-form
+            svg.w-6.h-6.mt-5(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
+              path(stroke-linecap='round' stroke-linejoin='round' d='M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z')
+
+        form.text-sm.flex.flex-col.py-2.gap-2.hidden#category-form(
+          action="/clothing"
+          method="post"
+          )
+          label 
+            span.flex New category name
+            if errors
+              - const newErrors = JSON.parse(errors);
+              if newErrors.length > 0 && newErrors[0].param === "name"
                 each error in newErrors
                   span.text-sm.font-thin.text-red-400= error.msg
-              else 
-              input.font-normal.border.border-slate-300.p-1.my-2.w-60.bg-white(
-                type="text"
-                name= "name"
-                value= value
-              )
-            button.text-white.font-black.bg-slate-700.py-2.w-60 Submit
+            else 
+            input.font-normal.border.border-slate-300.p-1.my-2.w-60.bg-white(
+              type="text"
+              name= "name"
+              value= value
+            )
+          button.text-white.font-black.bg-slate-700.py-2.w-60 Submit
 
-          ul
-            if categoryDetails
-              each categoryDetail in categoryDetails
-                li.mt-5.text-xs
-                  div.flex.items-center.justify-between.pr-4
-                    a(
-                      href="/clothing/category/" + categoryDetail._id
-                    )  #{categoryDetail.name} (#{categoryDetail.total})
-                    div.flex.hidden
-                      form.flex(action="/clothing/" method="post")
+        ul
+          if categoryDetails
+            each categoryDetail, index in categoryDetails
+              li.mt-5.text-xs
+                div.flex.items-center.justify-between.pr-4
+                  a(
+                    href="/clothing/category/" + categoryDetail._id
+                  )  #{categoryDetail.name} (#{categoryDetail.total})
+                  div.flex.flex-col.hidden
+                    if errors
+                      - const categoryEditErrors = JSON.parse(errors);
+                        if categoryEditErrors.length > 0 && categoryEditErrors[0].param === "categoryName"
+                          each error in categoryEditErrors
+                            p.text-sm.font-thin.text-red-400= error.msg
+                    .flex.mt-3
+                      form.flex(action="/clothing/" + categoryDetail._id method="post")
                         input.font-normal.border.border-slate-300.p-2.w-40(type= "text" value=categoryDetail.name name="categoryName")
+                        input.hidden(type= "text" value=categoryDetail._id name="categoryId")
+                        input.hidden(type= "text" value="edit-" + index name="editBtn")
                         input.cursor-pointer.text-white.font-black.bg-slate-700.p-2.ml-2.border.border-slate-700(
                           type="submit" value="Edit") 
                       button.text-white.font-black.bg-red-400.p-2.ml-2.border.border-red-400.h-max Cancel
-                    span.flex.gap-2.category-btns
-                      if categoryDetail.total === 0
-                        a(href=`/clothing/category/delete/${categoryDetail._id}`) 
-                          svg.w-5.h-5(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
-                            path(stroke-linecap='round' stroke-linejoin='round' d='M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0')
-                      button.edit-category-btn
+                  span.flex.gap-2.category-btns
+                    if categoryDetail.total === 0
+                      a(href=`/clothing/category/delete/${categoryDetail._id}`) 
                         svg.w-5.h-5(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
-                          path(stroke-linecap='round' stroke-linejoin='round' d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10')
+                          path(stroke-linecap='round' stroke-linejoin='round' d='M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0')
+                    button.edit-category-btn(class="edit-" + index)
+                      svg.w-5.h-5(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
+                        path(stroke-linecap='round' stroke-linejoin='round' d='M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10')
 
 
-    .w-screen.fixed.flex.justify-end.smd_hidden.items-sort.hidden
-      .w-80.h-screen.bg-white
-        .border-b.p-3.grid.grid-cols-12.smd_hidden
-          p.col-span-11.text-center SORT BY 
-          button.close-sort-btn
-            svg.w-6.h-6(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
-              path(stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12')
-        
-        - const sortTypes = ["Price Low-High", "Price High-Low", "Name Z-A", "Name A-Z"]
-        .flex.flex-col.mt-10.px-6 
-          each sortType in sortTypes
-            .flex.align-center.gap-4.py-4.border-b.cursor-pointer.sort-type
-              .border.border-2.rounded-full.w-6.h-6.border-green-300 
-              p= sortType
-
-
-    .px-3.flex.items-center.flex-col.smd_items-end 
-      h1.pt-20.font-black.text-xl.mmd_pt-28(
-        class="smd_w-2/3"
-      )= title 
-      .flex.w-full.border.mt-2.smd_hidden
-        button.flex.w-full.p-2.border.open-filter-btn
-          span.w-full Filter
-          svg(
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none" viewBox="0 0 24 24"
-            stroke-width="1.5" stroke="currentColor"
-            class="w-6 h-6"
-          )
-            path(
-              stroke-linecap="round" stroke-linejoin="round"
-              d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
-            )
-
-        button.flex.w-full.p-2.border.open-sort-btn
-          span.w-full Sort By
-          svg(
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none" viewBox="0 0 24 24"
-            stroke-width="1.5" stroke="currentColor"
-            class="w-6 h-6"
-          )
-            path(
-              stroke-linecap="round" stroke-linejoin="round"
-              d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
-            )
-
-      block content 
+  .w-screen.fixed.flex.justify-end.smd_hidden.items-sort.hidden
+    .w-80.h-screen.bg-white
+      .border-b.p-3.grid.grid-cols-12.smd_hidden
+        p.col-span-11.text-center SORT BY 
+        button.close-sort-btn
+          svg.w-6.h-6(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
+            path(stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12')
       
-    script(
-      src="./javascripts/index.js"
-    )
-  
-    script.
-      const h1 = document.querySelector("h1");
-      h1.textContent = h1.textContent.toUpperCase(); 
+      - const sortTypes = ["Price Low-High", "Price High-Low", "Name Z-A", "Name A-Z"]
+      .flex.flex-col.mt-10.px-6 
+        each sortType in sortTypes
+          .flex.align-center.gap-4.py-4.border-b.cursor-pointer.sort-type
+            .border.border-2.rounded-full.w-6.h-6.border-green-300 
+            p= sortType
 
-      function submitSelect(){
-        const form = document.querySelector("#sort-form");
-        const sortSelect = document.querySelector("select");
-        const sortOptions = sortSelect.options;
 
-        if(sortOptions.selectedIndex === 0){
-          return;  
-        }
-        form.submit();
+  .px-3.flex.items-center.flex-col.smd_items-end 
+    h1.pt-20.font-black.text-xl.mmd_pt-28(
+      class="smd_w-2/3"
+    )= title 
+    .flex.w-full.border.mt-2.smd_hidden
+      button.flex.w-full.p-2.border.open-filter-btn
+        span.w-full Filter
+        svg(
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor"
+          class="w-6 h-6"
+        )
+          path(
+            stroke-linecap="round" stroke-linejoin="round"
+            d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
+          )
+
+      button.flex.w-full.p-2.border.open-sort-btn
+        span.w-full Sort By
+        svg(
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none" viewBox="0 0 24 24"
+          stroke-width="1.5" stroke="currentColor"
+          class="w-6 h-6"
+        )
+          path(
+            stroke-linecap="round" stroke-linejoin="round"
+            d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
+          )
+
+    block content 
+    
+  script(
+    src="/javascripts/index.js"
+  )
+
+  script.
+    const h1 = document.querySelector("h1");
+    h1.textContent = h1.textContent.toUpperCase(); 
+
+    function submitSelect(){
+      const form = document.querySelector("#sort-form");
+      const sortSelect = document.querySelector("select");
+      const sortOptions = sortSelect.options;
+
+      if(sortOptions.selectedIndex === 0){
+        return;  
       }
-      
-      const errors = !{errors};
-      if(errors && errors.length > 0){
-        document.querySelector(".open-filter-btn").click();
+      form.submit();
+    }
+    
+    const errors = !{errors};
+    if(errors && errors.length > 0){
+      document.querySelector(".open-filter-btn").click();
+      if(errors[0].param === "name"){
         document.querySelector("#toggle-category-form").click();
+      }else if(errors[0].param === "categoryName"){
+        const editBtnClass = !{className};
+        document.querySelector(`.${editBtnClass}`).click();
       }
+    }

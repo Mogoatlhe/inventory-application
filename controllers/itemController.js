@@ -28,6 +28,7 @@ exports.index = (req, res, next) => {
         items: results.items,
         selected: selected,
         errors: JSON.stringify([]),
+        className: JSON.stringify("none"),
       });
     }
   );
@@ -211,6 +212,7 @@ const handleUpdateErrors = (res, errors, id) => {
         results,
         getItem,
         errors: errors.array(),
+        className: JSON.stringify("none"),
       });
     }
   );

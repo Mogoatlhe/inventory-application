@@ -10,7 +10,7 @@ router.get("/item/:itemId", item_Controller.item);
 router.get("/item/:itemId/edit", item_Controller.item_update_get);
 router.post("/item/:itemId/edit", item_Controller.item_update_post);
 router.post("/", category_Controller.category_create);
-// router.delete("/:id", category_Controller.category_delete);
 router.get("/category/delete/:id", category_Controller.category_delete);
+router.post("/:id", category_Controller.category_update);
 
 module.exports = router;

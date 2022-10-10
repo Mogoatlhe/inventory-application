@@ -31,6 +31,48 @@ exports.category_create = [
   },
 ];
 
+exports.category_update = [
+  body("categoryName")
+    .trim()
+    .isLength({ min: 1 })
+    .withMessage("category name cannot be empty")
+    .isLength({ max: 25 })
+    .withMessage("category name too long, max 25"),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      handleCreateErrors(res, res, errors, req.body.editBtn);
+      return;
+    }
+
+    Category.findOne({ name: req.body.categoryName }, (err, result) => {
+      if (err) {
+        return next(err);
+      }
+
+      if (result !== null) {
+        const itemExist = [
+          {
+            param: "categoryName",
+            msg: "category name must be unique",
+          },
+        ];
+        handleCreateErrors(res, req, itemExist, req.body.editBtn);
+        return;
+      }
+
+      const category = new Category({ name: req.body.categoryName });
+      Category.findByIdAndUpdate(req.body.categoryId, category, {}, (err) => {
+        if (err) {
+          return next(err);
+        }
+
+        handleCreateErrors(res, req, errors, req.body.editBtn);
+      });
+    });
+  },
+];
+
 exports.category_delete = (req, res, next) => {
   console.log("hello");
   Category.findByIdAndRemove(req.params.id, (error, results) => {
@@ -94,17 +136,13 @@ const doesCategoryExist = (name) => {
   });
 };
 
-const handleCreateErrors = (res, req, errors) => {
+const handleCreateErrors = (res, req, errors, className = "none") => {
+  const sortSelect = req.query === undefined ? "Sort" : req.query.sortSelect;
   async.series(
     {
       category_info,
       items(callback) {
-        Item.find(
-          {},
-          null,
-          { sort: setSortType(req.query.sortSelect) },
-          callback
-        );
+        Item.find({}, null, { sort: setSortType(sortSelect) }, callback);
       },
     },
     (err, results) => {
@@ -113,12 +151,14 @@ const handleCreateErrors = (res, req, errors) => {
         return next(err);
       }
 
+      const newErrors = Array.isArray(errors) ? errors : errors.array();
       res.render("index", {
         title: "Clothing",
         categoryDetails: results.category_info,
         items: results.items,
         selected: selected,
-        errors: JSON.stringify(errors.array()),
+        errors: JSON.stringify(newErrors),
+        className: JSON.stringify(className),
       });
     }
   );

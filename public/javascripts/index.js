@@ -151,10 +151,10 @@ for (const editCategoryBtn of editCategoryBtns) {
     buttonsParent.classList.add("hidden");
     categoriesAchorTag.classList.add("hidden");
     formContainer.classList.remove("hidden");
-    formContainer.lastChild.classList.add("cancel-category-edit-btn");
+    formContainer.lastChild.lastChild.classList.add("cancel-category-edit-btn");
 
     cancelCategoryEdit(
-      formContainer.lastChild,
+      formContainer.lastChild.lastChild,
       buttonsParent,
       categoriesAchorTag,
       formContainer
