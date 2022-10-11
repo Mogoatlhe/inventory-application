@@ -2,8 +2,9 @@ extends item
 
 block content 
   - let path=`/clothing/item/create`;
-  if(getItem.category.length > 0)
-    - path= `/clothing/item/${getItem._id}/edit`
+  if(getItem && getItem.category)
+    if(getItem.category.length > 0)
+      - path= `/clothing/item/${getItem._id}/edit`
   form(
     method="POST" action=`${path}`
   )

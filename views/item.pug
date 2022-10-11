@@ -22,7 +22,7 @@ html(lang='en')
         ) COOLWORTHS
 
     .w-screen.pt-20 
-      if(results.category || (results.getItem && results.getItem.category._id))
+      if(results.category || (results.getItem && (results.getItem.category && results.getItem.category._id)))
         if results.category
           a.text-sm.font-black.pl-2.slg_pl-10(
             href="/clothing/category/" + results.category._id)  #{results.category.name}
