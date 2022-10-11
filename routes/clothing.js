@@ -8,6 +8,7 @@ router.get("/", item_Controller.index);
 router.get("/category/:categoryId", item_Controller.items_by_category);
 router.get("/item/create", item_Controller.item_create_get);
 router.post("/item/create", item_Controller.item_create_post);
+router.post("/item/delete", item_Controller.item_delete);
 router.get("/item/:itemId", item_Controller.item);
 router.get("/item/:itemId/edit", item_Controller.item_update_get);
 router.post("/item/:itemId/edit", item_Controller.item_update_post);

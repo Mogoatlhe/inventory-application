@@ -13,8 +13,8 @@ block content
     button.mb-3.text-white.font-black.bg-slate-700.py-4
       a.inline-block.w-full.h-full(href="/clothing/item/" + results._id + "/edit") Edit
     button.mb-3.text-white.font-black.bg-red-400.py-4#delete-item-btn Delete
-    form#delete-item-form.w-full.hidden(action="/" method="post")
-      input.hidden(type=text value=results._id name=id)
+    form#delete-item-form.w-full.hidden(action="/clothing/item/delete" method="post")
+      input.hidden(type=text value=results._id name="id")
       button.mb-10.text-white.font-black.bg-red-700.py-4.w-full Confirm Delete
   
   script.

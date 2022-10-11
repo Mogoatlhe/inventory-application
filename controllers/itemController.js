@@ -239,6 +239,17 @@ exports.item_create_post = [
   },
 ];
 
+exports.item_delete = (req, res, next) => {
+  Item.findByIdAndDelete(req.body.id, (err) => {
+    if (err) {
+      return next(err);
+    }
+
+    console.log("lol");
+    res.redirect("/");
+  });
+};
+
 // helpers
 const setSortType = (sortType) => {
   if (sortType === "Price Low-High") {
