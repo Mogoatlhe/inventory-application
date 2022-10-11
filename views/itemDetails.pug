@@ -12,4 +12,15 @@ block content
   .grid.grid-cols-1.mt-5 
     button.mb-3.text-white.font-black.bg-slate-700.py-4
       a.inline-block.w-full.h-full(href="/clothing/item/" + results._id + "/edit") Edit
-    button.mb-10.text-white.font-black.bg-red-400.py-4 Delete
+    button.mb-3.text-white.font-black.bg-red-400.py-4#delete-item-btn Delete
+    form#delete-item-form.w-full.hidden(action="/" method="post")
+      input.hidden(type=text value=results._id name=id)
+      button.mb-10.text-white.font-black.bg-red-700.py-4.w-full Confirm Delete
+  
+  script.
+    const deleteItemBtn = document.querySelector("#delete-item-btn");
+    deleteItemBtn.addEventListener("click", function(){
+      const deleteItemForm = document.querySelector("#delete-item-form");
+      this.classList.add("hidden");
+      deleteItemForm.classList.remove("hidden");
+    });
