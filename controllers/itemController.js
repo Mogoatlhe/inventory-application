@@ -107,6 +107,11 @@ exports.item_update_get = (req, res, next) => {
       }
 
       const getItem = results.getItem.toObject();
+
+      if (!("description" in getItem)) {
+        getItem.description = "";
+      }
+
       res.render("itemForm", {
         results,
         getItem,
