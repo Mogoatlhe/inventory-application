@@ -150,7 +150,6 @@ exports.item_create_get = (req, res, next) => {
     }
 
     results.name = "Add new item";
-
     const getItem = {
       name: "",
       price: 0,
@@ -193,23 +192,55 @@ exports.item_create_post = [
       }
 
       const errors = validationResult(req);
-      const newErrors = errors.isEmpty() ? [] : errors.array();
 
       results.name = "Add new item";
-
       const getItem = {
-        name: "",
-        price: 0,
-        description: "",
-        count: 0,
+        name: req.body.name,
+        price: req.body.price,
+        description: req.body.description,
+        count: req.body.count,
         category: "",
       };
 
-      res.render("itemForm", {
-        results: results,
-        getItem: getItem,
-        errors: newErrors,
-      });
+      if (!errors.isEmpty()) {
+        return res.render("itemForm", {
+          results: results,
+          getItem: getItem,
+          errors: errors.array(),
+        });
+      }
+
+      Category.findOne(
+        { name: req.body.category },
+        { _id: 1 },
+        (error, category) => {
+          if (error) {
+            return next(error);
+          }
+
+          const item = new Item({
+            name: req.body.name,
+            description: req.body.description,
+            price: req.body.price,
+            category: category._id,
+            count: req.body.count,
+          });
+
+          item.save((err, newItem) => {
+            if (err) {
+              return next(err);
+            }
+
+            console.log(newItem._id);
+
+            res.render("itemForm", {
+              results: results,
+              getItem: getItem,
+              success: `${req.body.name} successfully added`,
+            });
+          });
+        }
+      );
     });
   },
 ];
