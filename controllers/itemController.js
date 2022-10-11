@@ -23,6 +23,12 @@ exports.index = (req, res, next) => {
         return next(err);
       }
 
+      let success = false;
+      if (deleteSuccess) {
+        deleteSuccess = false;
+        success = true;
+      }
+
       res.render("index", {
         title: "Clothing",
         categoryDetails: results.category_info,
@@ -30,7 +36,7 @@ exports.index = (req, res, next) => {
         selected: selected,
         errors: JSON.stringify([]),
         className: JSON.stringify("none"),
-        success: deleteSuccess,
+        success: success,
       });
     }
   );
