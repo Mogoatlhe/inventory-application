@@ -9,9 +9,9 @@ block content
   p.text-sm.mt-1.text-slate-400= results.count
   p.font-black.text-sm.mt-3.text-slate-500 Product code:
   p.text-sm.mt-1.text-slate-400= results._id
-  .grid.grid-cols-1.mt-5 
-    button.mb-3.text-white.font-black.bg-slate-700.py-4
-      a.inline-block.w-full.h-full(href="/clothing/item/" + results._id + "/edit") Edit
+  .grid.grid-cols-1.mt-5
+    form(action="/clothing/item/" + results._id + "/edit" method="get")  
+      button.mb-3.text-white.font-black.bg-slate-700.py-4.w-full Edit
     button.mb-3.text-white.font-black.bg-red-400.py-4#delete-item-btn Delete
     form#delete-item-form.w-full.hidden(action="/clothing/item/delete" method="post")
       input.hidden(type=text value=results._id name="id")
