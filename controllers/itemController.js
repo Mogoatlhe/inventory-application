@@ -231,13 +231,7 @@ exports.item_create_post = [
               return next(err);
             }
 
-            console.log(newItem._id);
-
-            res.render("itemForm", {
-              results: results,
-              getItem: getItem,
-              success: `${req.body.name} successfully added`,
-            });
+            res.redirect(`/clothing/item/${newItem._id.toString()}`);
           });
         }
       );
