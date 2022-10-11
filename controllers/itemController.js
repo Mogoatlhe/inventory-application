@@ -125,6 +125,9 @@ exports.item_update_post = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
+  body("description", "item description must not be empty")
+    .trim()
+    .isLength({ min: 1 }),
   body("price")
     .isInt({ min: 100 })
     .withMessage("item price must be an integer above 99")
@@ -329,6 +332,11 @@ const handleUpdateErrors = (res, errors, id) => {
       }
 
       const getItem = results.getItem.toObject();
+
+      if (!("description" in getItem)) {
+        getItem.description = "";
+      }
+
       res.render("itemForm", {
         results,
         getItem,
