@@ -16,4 +16,19 @@ html.m-0.h-full.overflow-hidden.smd_overflow-auto.smd_m-auto.smd_h-max(lang='en'
           class="mmd_text-black mmd_text-3xl mmd_px-10 mmd_py-5"
           href="/"
         ) COOLWORTHS
+    - let marginBtm = "mb-2", display="hidden"
+    if(success === true)
+      - marginBtm = "mb-0"
+      - display = "block"
+    header.w-screen(class=marginBtm)
+      .bg-black.mmd_bg-white.py-3.px-3.smd_px-24.mmd_border-b 
+        a.text-white.font-lato.font-black.text-2xl.smd_text-xl(
+          class="mmd_text-black mmd_text-3xl mmd_px-10 mmd_py-5"
+          href="/"
+        ) COOLWORTHS
+    .bg-green-500.mb-2.flex.justify-between.p-3(class=display) 
+      p.font-black.text-white Item successfully deleted
+      button#close-delete-success-btn.text-white.font-black
+        svg.w-6.h-6(xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke-width='1.5' stroke='currentColor')
+          path(stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12')
     block layout

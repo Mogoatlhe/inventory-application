@@ -161,3 +161,14 @@ for (const editCategoryBtn of editCategoryBtns) {
     );
   });
 }
+
+const closeDeleteFeedBackBtn = document.querySelector(
+  "#close-delete-success-btn"
+);
+
+closeDeleteFeedBackBtn.addEventListener("click", function () {
+  this.parentElement.classList.remove("block");
+  this.parentElement.classList.add("hidden");
+  this.parentElement.previousSibling.classList.remove("mb-0");
+  this.parentElement.previousSibling.classList.add("mb-2");
+});

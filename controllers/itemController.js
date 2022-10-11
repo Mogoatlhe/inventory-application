@@ -4,6 +4,7 @@ const async = require("async");
 const { body, validationResult } = require("express-validator");
 
 let selected;
+let deleteSuccess = false;
 exports.index = (req, res, next) => {
   async.series(
     {
@@ -29,6 +30,7 @@ exports.index = (req, res, next) => {
         selected: selected,
         errors: JSON.stringify([]),
         className: JSON.stringify("none"),
+        success: deleteSuccess,
       });
     }
   );
@@ -245,7 +247,7 @@ exports.item_delete = (req, res, next) => {
       return next(err);
     }
 
-    console.log("lol");
+    deleteSuccess = true;
     res.redirect("/");
   });
 };
