@@ -39,6 +39,11 @@ html(lang='en')
                 src=`/images/${results.image}`
                 alt=`${results.name} image`
               )
+            else if(getItem.image)
+              img(
+                src=`/images/${getItem.image}`
+                alt=`${getItem.name} image`
+              )
             else
               p.text-white.font-black No image available
         
