@@ -25,7 +25,11 @@ router.post(
 router.post("/item/delete", item_Controller.item_delete);
 router.get("/item/:itemId", item_Controller.item);
 router.get("/item/:itemId/edit", item_Controller.item_update_get);
-router.post("/item/:itemId/edit", item_Controller.item_update_post);
+router.post(
+  "/item/:itemId/edit",
+  upload.single("image"),
+  item_Controller.item_update_post
+);
 router.post("/", category_Controller.category_create);
 router.get("/category/delete/:id", category_Controller.category_delete);
 router.post("/:id", category_Controller.category_update);

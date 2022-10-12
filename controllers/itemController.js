@@ -150,6 +150,7 @@ exports.item_update_post = [
     .isLength({ min: 1 })
     .withMessage("item count must not be empty"),
   (req, res, next) => {
+    console.log(req.body.name);
     const errors = validationResult(req);
 
     const id = req.params.itemId;
