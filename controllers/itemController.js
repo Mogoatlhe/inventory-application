@@ -216,7 +216,6 @@ exports.item_create_post = [
       }
 
       const errors = validationResult(req);
-
       const re = /image\/*/;
       if (req.file !== undefined && !re.test(req.file.mimetype)) {
         errors.errors.push({
@@ -232,7 +231,7 @@ exports.item_create_post = [
         description: req.body.description,
         count: req.body.count,
         category: "",
-        image: req.file === undefined ? undefined : req.file.originalname,
+        image: req.file === undefined ? undefined : req.file.filename,
       };
 
       if (!errors.isEmpty()) {
@@ -257,6 +256,7 @@ exports.item_create_post = [
             price: req.body.price,
             category: category._id,
             count: req.body.count,
+            image: req.file === undefined ? undefined : req.file.filename,
           });
 
           item.save((err, newItem) => {

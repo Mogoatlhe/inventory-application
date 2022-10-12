@@ -1,7 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-const upload = multer({ dest: "./../public" });
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, __dirname + "./../public/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "." + file.originalname.split(".")[1]); //Appending extension
+  },
+});
+const upload = multer({ storage: storage });
 
 const item_Controller = require("../controllers/itemController");
 const category_Controller = require("../controllers/categoryController");
