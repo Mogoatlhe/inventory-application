@@ -358,8 +358,6 @@ const handleUpdateErrors = (res, errors, id) => {
         getItem.image = "";
       }
 
-      console.log(getItem);
-
       res.render("itemForm", {
         results,
         getItem,
