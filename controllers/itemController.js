@@ -29,6 +29,8 @@ exports.index = (req, res, next) => {
         success = true;
       }
 
+      deleteUnusedImages(req._parsedOriginalUrl.pathname, results.items);
+
       res.render("index", {
         title: "Clothing",
         categoryDetails: results.category_info,
@@ -404,4 +406,14 @@ const updateItem = (req, res, next, id) => {
       res.redirect(`/clothing/item/${id}`);
     });
   });
+};
+
+const deleteUnusedImages = (path, items) => {
+  if (path !== "/clothing") {
+    return;
+  }
+
+  const images = items
+    .map((item) => item.image)
+    .filter((image) => image !== undefined);
 };
