@@ -7,6 +7,7 @@ block content
       - path= `/clothing/item/${getItem._id}/edit`
   form(
     method="POST" action=`${path}`
+    enctype="multipart/form-data"
   )
     .flex.flex-col.gap-2 
       each val, key in getItem 
@@ -29,6 +30,13 @@ block content
                         selected= category.name == getItem.category.name)= category.name 
                     else 
                       option No categories 
+              else if key === "image"
+                input.font-normal.border.border-slate-300.p-2.w-80(
+                    type="file"
+                    value=val
+                    name=key
+                    accept="image/*"
+                  )
               else
                 -var inputType = "number"
                 if key !== "count" && key !== "price"

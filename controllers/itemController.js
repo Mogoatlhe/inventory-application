@@ -112,6 +112,10 @@ exports.item_update_get = (req, res, next) => {
         getItem.description = "";
       }
 
+      if (!("image" in getItem)) {
+        getItem.image = null;
+      }
+
       res.render("itemForm", {
         results,
         getItem,
@@ -172,6 +176,7 @@ exports.item_create_get = (req, res, next) => {
       description: "",
       count: 0,
       category: "",
+      image: null,
     };
 
     res.render("itemForm", { results: results, getItem: getItem });
@@ -212,6 +217,14 @@ exports.item_create_post = [
 
       const errors = validationResult(req);
 
+      const re = /image\/*/;
+      if (req.file !== undefined && !re.test(req.file.mimetype)) {
+        errors.errors.push({
+          msg: "file must be of type image",
+          param: "image",
+        });
+      }
+
       results.name = "Add new item";
       const getItem = {
         name: req.body.name,
@@ -219,6 +232,7 @@ exports.item_create_post = [
         description: req.body.description,
         count: req.body.count,
         category: "",
+        image: req.file === undefined ? undefined : req.file.originalname,
       };
 
       if (!errors.isEmpty()) {
@@ -339,6 +353,12 @@ const handleUpdateErrors = (res, errors, id) => {
       if (!("description" in getItem)) {
         getItem.description = "";
       }
+
+      if (!("image" in getItem)) {
+        getItem.image = "";
+      }
+
+      console.log(getItem);
 
       res.render("itemForm", {
         results,
