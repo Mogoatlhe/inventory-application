@@ -375,6 +375,14 @@ const updateItem = (req, res, next, id) => {
       console.log(err);
       return next(err);
     }
+
+    const re = /image\/*/;
+    if (req.file !== undefined && !re.test(req.file.mimetype)) {
+      errors.errors.push({
+        msg: "file must be of type image",
+        param: "image",
+      });
+    }
     const categoryId = result._id.toString();
 
     const item = new Item({
@@ -384,6 +392,7 @@ const updateItem = (req, res, next, id) => {
       category: categoryId,
       count: req.body.count,
       _id: id,
+      image: req.file === undefined ? undefined : req.file.filename,
     });
 
     Item.findByIdAndUpdate(id, item, {}, (err) => {

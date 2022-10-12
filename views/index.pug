@@ -36,10 +36,10 @@ block content
             if(item.image)
               - bgColour = `bg-white`
             .w-full.h-64.sm_h-96.grid.place-items-center(class=bgColour)
-              if(item.image)
+              if(results.image)
                 img(
                   src=`images/${item.image}`
-                  alt=`${item.image} image`
+                  alt=`${item.name} image`
                 )
                 
               else
