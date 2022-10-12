@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, __dirname + "./../public/");
+    cb(null, __dirname + "./../public/images");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + "." + file.originalname.split(".")[1]); //Appending extension

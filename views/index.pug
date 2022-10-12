@@ -32,8 +32,18 @@ block content
           class="w-11/12"
         )
           a(href="/clothing" + item.url).w-full
-            .w-full.h-64.sm_h-96.bg-slate-300.grid.place-items-center
-              p.text-white.font-black No image available
+            - bgColour = `bg-slate-300`
+            if(item.image)
+              - bgColour = `bg-white`
+            .w-full.h-64.sm_h-96.grid.place-items-center(class=bgColour)
+              if(item.image)
+                img(
+                  src=`images/${item.image}`
+                  alt=`${item.image} image`
+                )
+                
+              else
+                p.text-white.font-black No image available
             .flex.flex-col.pl-2.items-start.pt-4.mb-2.w-full
               p.text-sm.h-16 #{item.name}
               p.font-black.font-lato.text-sm R#{item.price}.00
