@@ -183,6 +183,9 @@ exports.item_create_post = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
+  body("description", "item description must not be empty")
+    .trim()
+    .isLength({ min: 1 }),
   body("price")
     .isInt({ min: 100 })
     .withMessage("item price must be an integer above 99")
