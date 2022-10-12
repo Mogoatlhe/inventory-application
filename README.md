@@ -37,4 +37,4 @@ an online clothing store `CRUD` web application
 
 ## Credits
 
-- All the images, and product details along with the design of the website is from: https://woolworths.co.za/clothing/men
+- All the images, and product details along with the design of the website is from: https://www.woolworths.co.za/cat/Men/Clothing/_/N-1z13s3l
