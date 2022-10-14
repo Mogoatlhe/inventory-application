@@ -1,6 +1,6 @@
-![](./home-screen.png)
-
 # inventory-application
+
+![](./home-screen.png)
 
 an online clothing store `CRUD` web application
 
