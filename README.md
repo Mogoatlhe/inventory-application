@@ -1,8 +1,8 @@
 # inventory-application
 
-![](./home-screen.png)
-
 an online clothing store `CRUD` web application
+
+![](./home-screen.png)
 
 ## Core Features
 
