@@ -34,18 +34,18 @@ html(lang='en')
           .w-full.bg-slate-300.grid.place-items-center(
             class = "h-[90vh]"
           )
-            if(results.image)
+            unless results.image
+              p.text-white.font-black No image available
+            else if results.image
               img(
                 src=`/images/${results.image}`
                 alt=`${results.name} image`
               )
-            else if(getItem.image)
+            else if getItem.image
               img(
                 src=`/images/${getItem.image}`
                 alt=`${getItem.name} image`
               )
-            else
-              p.text-white.font-black No image available
         
         .flex.flex-col.mt-4.px-4.slg_justify-self-end.slg_mr-14(
           class="slg_w-4/5"
