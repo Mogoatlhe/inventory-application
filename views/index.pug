@@ -18,12 +18,7 @@ block content
           option(value="Price Low-High" selected= selected == "Price Low-High") Price Low-High 
           option(value="Price High-Low" selected= selected == "Price High-Low") Price High-Low 
           option(value="Name Z-A" selected= selected == "Name Z-A") Name Z-A 
-          option(value="Name A-Z" selected= selected == "Name A-Z") Name A-Z 
-      //- .flex.items-center.w-12.justify-between 
-      //-   button.w-5.h-5.bg-slate-200
-      //-   .grid.grid-cols-2.gap-1
-      //-     - for(i = 0; i < 4; i++)
-      //-     .w-2.h-2.bg-gray-400
+          option(value="Name A-Z" selected= selected == "Name A-Z") Name A-Z
 
   .flex.justify-start(class="smd_w-3/4")
     .grid.grid-cols-2.gap-2.mt-5.md_grid-cols-3.smd_grid-cols-2.lg_grid-cols-3
@@ -51,5 +46,3 @@ block content
             .flex.flex-col.pl-2.items-start.pt-4.mb-2.w-full
               p.text-sm.h-16 #{item.name}
               p.font-black.font-lato.text-sm R#{item.price}.00
-  //-   else 
-  //-     h1 This category has no items, and may be deleted.
