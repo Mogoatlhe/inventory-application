@@ -14,14 +14,14 @@ html(lang='en')
     link(rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png')
     link(rel='manifest' href='/site.webmanifest')
   body
-    header.fixed.w-screen
+    header.fixed.w-full
       .bg-black.mmd_bg-white.py-3.px-3.smd_px-24.mmd_border-b 
         a.text-white.font-lato.font-black.text-2xl.smd_text-xl(
           class="mmd_text-black mmd_text-3xl mmd_px-10 mmd_py-5"
           href="/"
         ) COOLWORTHS
 
-    .w-screen.pt-20 
+    .w-full.pt-20 
       if(results.category || (results.getItem && (results.getItem.category && results.getItem.category._id)))
         if results.category
           a.text-sm.font-black.pl-2.slg_pl-10(
