@@ -676,6 +676,23 @@ video {
   height: 80vh;
 }
 
+.h-10 {
+  height: 2.5rem;
+}
+
+.h-fit {
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.h-1\/2 {
+  height: 50%;
+}
+
 .w-11\/12 {
   width: 91.666667%;
 }
@@ -714,6 +731,10 @@ video {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-\[90-vh\] {
+  width: 90-vh;
 }
 
 .cursor-pointer {
@@ -874,6 +895,11 @@ video {
 .bg-blue-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1));
+}
+
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .p-1 {

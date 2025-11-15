@@ -31,8 +31,8 @@ html(lang='en')
             href="/clothing/category/" + results.getItem.category._id)  #{results.getItem.category.name}
       .grid.grid-cols-1.slg_grid-cols-2.slg_px-10.slg_gap-10
         .w-full.mt-4
-          .w-full.bg-slate-300.grid.place-items-center(
-            class = "h-[90vh]"
+          .w-full.grid.place-items-center(
+            class = `${(results && results.image) || (getItem && getItem.image) ? "bg-white" : "bg-slate-300"} h-[80vh]`
           )
             unless results.image
               p.text-white.font-black No image available
@@ -40,11 +40,13 @@ html(lang='en')
               img(
                 src=`/images/${results.image}`
                 alt=`${results.name} image`
+                class = "h-[80vh]"
               )
             else if getItem.image
               img(
                 src=`/images/${getItem.image}`
                 alt=`${getItem.name} image`
+                class = "h-[80vh]"
               )
         
         .flex.flex-col.mt-4.px-4.slg_justify-self-end.slg_mr-14(
