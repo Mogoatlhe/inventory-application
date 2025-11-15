@@ -3,7 +3,7 @@ extends layout
 block content
   - var length = items.length
   
-  .flex.w-full.justify-end(class="smd_w-2/3")
+  .flex.w-full.justify-end(class="smd_w-3/4")
     .flex.w-full.mt-5.justify-between.items-center
       .flex.items-center.w-full.justify-between.smd_flex-col.smd_w-min.smd_gap-2 
         p.font-thin.text-sm.text-slate-800 #{length} item(s) found
@@ -25,7 +25,7 @@ block content
       //-     - for(i = 0; i < 4; i++)
       //-     .w-2.h-2.bg-gray-400
 
-  .flex.justify-start(class="smd_w-2/3")
+  .flex.justify-start(class="smd_w-3/4")
     .grid.grid-cols-2.gap-2.mt-5.md_grid-cols-3.smd_grid-cols-2.lg_grid-cols-3
       each item in items 
         .grid.grid-cols-1.place-items-center(
@@ -35,15 +35,19 @@ block content
             - bgColour = `bg-slate-300`
             if(item.image)
               - bgColour = `bg-white`
-            .w-full.h-64.sm_h-96.grid.place-items-center(class=bgColour)
+            .w-full.h-full.grid.place-items-center(class=bgColour)
               if(item.image)
                 img(
                   src=`/images/${item.image}`
                   alt=`${item.name} image`
+                  class = "h-full w-full object-fill"
                 )
                 
               else
-                p.text-white.font-black No image available
+                .flex.justify-center.items-center(
+                  class = "h-[600px]"
+                )
+                  p.text-white.font-black No image available
             .flex.flex-col.pl-2.items-start.pt-4.mb-2.w-full
               p.text-sm.h-16 #{item.name}
               p.font-black.font-lato.text-sm R#{item.price}.00
