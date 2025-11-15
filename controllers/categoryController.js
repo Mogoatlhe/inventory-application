@@ -79,7 +79,6 @@ exports.category_update = [
 ];
 
 exports.category_delete = (req, res, next) => {
-  console.log("hello");
   Category.findByIdAndRemove(req.params.id, (error, results) => {
     if (error) {
       console.log(err);
